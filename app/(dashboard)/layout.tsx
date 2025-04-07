@@ -1,0 +1,12 @@
+import React from "react";
+import Image from "next/image";
+
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <>
+      <div className="">{children}</div>
+    </>
+  );
+};
+
+export default Layout;

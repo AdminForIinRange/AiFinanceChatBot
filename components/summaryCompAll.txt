@@ -1,0 +1,1886 @@
+"use client";
+
+import React, { useState } from "react";
+import Image from "next/image";
+import { useListingCreationContext } from "@/context/ListingCreationContext";
+import {
+  Box,
+  Flex,
+  Button,
+  Heading,
+  Text,
+  Card,
+  IconButton,
+  VStack,
+  HStack,
+  Tabs,
+} from "@chakra-ui/react";
+import {
+  Star,
+  Users,
+  Bed,
+  Bath,
+  Share,
+  Heart,
+  Home,
+  StarIcon,
+  Award,
+  TrendingUp,
+  MessageCircle,
+  Package,
+  Plus,
+  Minus,
+  DoorOpen,
+  CigaretteOff,
+  Music,
+  Clock,
+  PawPrint,
+  Moon,
+  Share2,
+} from "lucide-react";
+import { Rating } from "@/components/chakra-snippets/rating";
+import { ChatBubbleIcon, Share1Icon } from "@radix-ui/react-icons";
+import AboutSummary from "./summaryComponents/summaryTabs/AboutSummary";
+import PaymentCard from "./summaryComponents/PaymentCard";
+import LoactionSummary from "./summaryComponents/summaryTabs/LocationSummary";
+import AmenitiesSummary from "./summaryComponents/summaryTabs/AmenitiesSummary";
+import ReviewsSummary from "./summaryComponents/summaryTabs/ReviewsSummary";
+const Summary = () => {
+  const {
+    season,
+        setSeason,
+        progress,
+        setProgress,
+        selectedProperty,
+        setSelectedProperty,
+        title,
+        setTitle,
+        description,
+        setDescription,
+        address,
+        setAddress,
+        mapUrl,
+        setMapUrl,
+        addedRooms,
+        setAddedRooms,
+        addRoomProgress,
+        setAddRoomProgress,
+        uploadedFiles,
+        setUploadedFiles,
+        imageDetails,
+        setImageDetails,
+        basePrice,
+        setBasePrice,
+        minPrice,
+        setMinPrice,
+        maxPrice,
+        setMaxPrice,
+        weekendAdjustment,
+        setWeekendAdjustment,
+        seasonalAdjustment,
+        setSeasonalAdjustment,
+        packageDiscounts,
+        setPackageDiscounts,
+        rules,
+        setRules,
+        recommendations,
+        setRecommendations,
+        packs,
+        setPacks,
+        selectedAmenities,
+        setSelectedAmenities,
+        customAmenity,
+        setCustomAmenity,
+        selectedTab,
+        setSelectedTab,
+        prices,
+        setPrices,
+        selectedDates,
+        setSelectedDates,
+        loadingInsights,
+        setLoadingInsights,
+        insights,
+        setInsights,
+        editDialogOpen,
+        setEditDialogOpen,
+        editRate,
+        setEditRate,
+  } = useListingCreationContext();
+  const [value, setValue] = useState<string | null>("About");
+  return (
+    <Box
+      rounded={"lg"}
+      p={0}
+      mb={8}
+      className="animate__animated animate__fadeIn"
+      textAlign={{ base: "center", lg: "start" }}
+    >
+      <Text fontSize={["24px", "30px", "36px"]} fontWeight="bold" mb="8px">
+        Summary
+      </Text>
+      <Text fontSize={["16px", "20px"]} color="gray.600">
+        Here&apos;s a summary of your listing.
+      </Text>
+
+      <Box mt={"50px"}>
+        <Text fontSize={["24px", "30px", "36px"]} fontWeight="bold" mb="8px">
+        {title}
+        </Text>
+
+        <HStack w={"100%"} justify={"space-between"}>
+          <HStack
+            w={"100%"}
+            width={"fit-content"}
+            //   border={"1px solid lightgray"}
+            //  px={3}
+            //   p={2}
+            rounded={"full"}
+          >
+            <Rating
+              defaultValue={3.5}
+              allowHalf
+              colorPalette="yellow"
+              readOnly
+              size="md"
+            />
+            <Text fontSize={["16px", "18px"]} color="gray.600">
+              {" "}
+              4.9 186 reviews
+            </Text>
+
+            <Box
+              rounded={"full"}
+              width={"fit-content"}
+              // border={"1px solid lightgray"}
+              // px={3}
+              // p={2}
+              fontSize={["16px", "18px"]}
+              color="gray.600"
+            >
+         {address}
+            </Box>
+          </HStack>
+
+          <HStack justify={"end"}>
+            <Box
+              gap={2}
+              justifyContent={"space-between"}
+              display={"flex"}
+              justifyItems={"center"}
+              alignItems={"center"}
+              as={"button"}
+              p={2}
+              px={5}
+              border={"1px solid lightgray"}
+              rounded={"16px"}
+              w={"fit-content"}
+            >
+              <Heart size={20} color="black" />
+              Save
+            </Box>
+
+            <Box
+              gap={2}
+              justifyContent={"space-between"}
+              display={"flex"}
+              justifyItems={"center"}
+              alignItems={"center"}
+              as={"button"}
+              p={2}
+              px={5}
+              border={"1px solid lightgray"}
+              rounded={"16px"}
+              w={"fit-content"}
+            >
+              <Share size={20} color="black" />
+              Share
+            </Box>
+          </HStack>
+        </HStack>
+
+        <Flex gap={2} w={"100%"} h={"500px"} mb={8} mt={8}>
+          {/* {uploadedFiles.length > 0 ? ( */}
+
+          <Box
+            backgroundImage={imageDetails[0] ? `url(${URL.createObjectURL(imageDetails[0].file)})` : undefined}
+            backgroundSize="cover"
+            backgroundPosition="center"
+            backgroundRepeat="no-repeat"
+            transition={"all 0.3s"}
+            w={"100%"}
+            h={"100%"}
+            borderRadius={"16px"}
+       
+            _hover={{
+              scale: 1.01,
+            }}
+            cursor={"pointer"}
+          >
+            <Box p={2}>
+              <Box
+                width={"fit-content"}
+                border={"1px solid lightgray"}
+                bg={"gray.50"}
+                p={2}
+                px={3}
+                rounded={"full"}
+              >
+                Living Room
+              </Box>
+            </Box>
+          </Box>
+
+          <Box
+            w={"100%"}
+            h={"100%"}
+            borderRadius={"16px"}
+            display={"flex"}
+            justifyContent={"start"}
+          >
+            <VStack
+              w={"100%"}
+              h={"100%"}
+              borderRadius={"16px"}
+              display={"flex"}
+              justifyContent={"start"}
+            >
+              <Box w={"100%"} h={"100%"} borderRadius={"16px"}>
+                <HStack w={"100%"} h={"100%"} borderRadius={"16px"}>
+                  <Box
+                    backgroundImage={imageDetails[2] ? `url(${URL.createObjectURL(imageDetails[0].file)})` : undefined}
+                    backgroundSize="cover"
+                    backgroundPosition="center"
+                    backgroundRepeat="no-repeat"
+                    transition={"all 0.3s"}
+                    cursor={"pointer"}
+                    w={"100%"}
+                    h={"100%"}
+                    borderRadius={"16px"}
+                    // bg={"gray.400"}
+
+                    _hover={{
+                      scale: 1.025,
+                    }}
+                  >
+                    {" "}
+                    <Box p={2}>
+                      <Box
+                        width={"fit-content"}
+                        border={"1px solid lightgray"}
+                        bg={"gray.50"}
+                        p={2}
+                        px={3}
+                        rounded={"full"}
+                      >
+                        Living Room
+                      </Box>
+                    </Box>
+                  </Box>
+                  <Box
+                    backgroundImage={imageDetails[3] ? `url(${URL.createObjectURL(imageDetails[0].file)})` : undefined}
+                    backgroundSize="cover"
+                    backgroundPosition="center"
+                    backgroundRepeat="no-repeat"
+                    transition={"all 0.3s"}
+                    cursor={"pointer"}
+                    w={"100%"}
+                    h={"100%"}
+                    borderRadius={"16px"}
+                    // bg={"gray.400"}
+                    _hover={{
+                      scale: 1.025,
+                    }}
+                  >
+                    {" "}
+                    <Box p={2}>
+                      <Box
+                        width={"fit-content"}
+                        border={"1px solid lightgray"}
+                        bg={"gray.50"}
+                        p={2}
+                        px={3}
+                        rounded={"full"}
+                      >
+                        Living Room
+                      </Box>
+                    </Box>
+                  </Box>
+                </HStack>
+              </Box>
+              <Box w={"100%"} h={"100%"} borderRadius={"16px"}>
+                <HStack w={"100%"} h={"100%"} borderRadius={"16px"}>
+                  <Box
+                    backgroundImage={imageDetails[4] ? `url(${URL.createObjectURL(imageDetails[0].file)})` : undefined}
+                    backgroundSize="cover"
+                    backgroundPosition="center"
+                    backgroundRepeat="no-repeat"
+                    transition={"all 0.3s"}
+                    cursor={"pointer"}
+                    w={"100%"}
+                    h={"100%"}
+                    borderRadius={"16px"}
+                    // bg={"gray.400"}
+                    _hover={{
+                      scale: 1.025,
+                    }}
+                  >
+                    {" "}
+                    <Box p={2}>
+                      <Box
+                      
+                        width={"fit-content"}
+                        border={"1px solid lightgray"}
+                        bg={"gray.50"}
+                        p={2}
+                        px={3}
+                        rounded={"full"}
+                      >
+                        Living Room
+                      </Box>
+                    </Box>
+                  </Box>
+                  <Box
+                    backgroundImage={imageDetails[5] ? `url(${URL.createObjectURL(imageDetails[0].file)})` : undefined}
+                    backgroundSize="cover"
+                    backgroundPosition="center"
+                    backgroundRepeat="no-repeat"
+                    transition={"all 0.3s"}
+                    cursor={"pointer"}
+                    w={"100%"}
+                    h={"100%"}
+                    borderRadius={"16px"}
+                    // bg={"gray.400"}
+                    _hover={{
+                      scale: 1.025,
+                    }}
+                  >
+                    {" "}
+                    <Box p={2}>
+                      <Box
+                        width={"fit-content"}
+                        border={"1px solid lightgray"}
+                        bg={"gray.50"}
+                        p={2}
+                        px={3}
+                        rounded={"full"}
+                      >
+                        Living Room
+                      </Box>
+                    </Box>
+                  </Box>
+                </HStack>
+              </Box>
+            </VStack>
+          </Box>
+        </Flex>
+      </Box>
+      {/* Image Gallery */}
+
+      {/* Main Content */}
+      <Flex
+        direction={{ base: "column", md: "row" }}
+        gap={8}
+        align={"start"}
+        justify={"start"}
+    mt={"50px"}
+      >
+        {/* Left Column */}
+        <Box flex={2} mb={8}>
+          <Tabs.Root
+            w={"100%"}
+            variant={"plain"}
+          
+            value={value}
+            onValueChange={(details) => setValue(details.value)}
+            defaultValue="calendar"
+            borderRadius="lg"
+          >
+            <Tabs.List
+              display="flex"
+              justifyContent="space-between"
+              w="100%"
+              gap="20px"
+              bg={"gray.200"}
+              p={2}
+              borderRadius={"16px"}
+            >
+              <Tabs.Trigger
+                textAlign={"center"}
+                display={"flex"}
+                alignItems={"center"}
+                justifyContent={"center"}
+                w={"100%"}
+                value="About"
+                px="4"
+                py="2"
+                borderRadius="md"
+                fontWeight="medium"
+                color={"gray.600"}
+                _selected={{
+                  bg: "white",
+                  color: "black",
+                }}
+              >
+                About
+              </Tabs.Trigger>
+              <Tabs.Trigger
+                textAlign={"center"}
+                display={"flex"}
+                alignItems={"center"}
+                justifyContent={"center"}
+                w={"100%"}
+                value="Amenities"
+                px="4"
+                py="2"
+                borderRadius="md"
+                fontWeight="medium"
+                color={"gray.600"}
+                _selected={{
+                  bg: "white",
+                  color: "black",
+                }}
+              >
+                Amenities
+              </Tabs.Trigger>
+              <Tabs.Trigger
+                textAlign={"center"}
+                display={"flex"}
+                alignItems={"center"}
+                justifyContent={"center"}
+                w={"100%"}
+                value="Reviews"
+                px="4"
+                py="2"
+                borderRadius="md"
+                fontWeight="medium"
+                color={"gray.600"}
+                _selected={{
+                  bg: "white",
+                  color: "black",
+                }}
+              >
+                Reviews
+              </Tabs.Trigger>
+              <Tabs.Trigger
+                textAlign={"center"}
+                display={"flex"}
+                alignItems={"center"}
+                justifyContent={"center"}
+                w={"100%"}
+                value="Location"
+                px="4"
+                py="2"
+                borderRadius="md"
+                fontWeight="medium"
+                color={"gray.600"}
+                _selected={{
+                  bg: "white",
+                  color: "black",
+                }}
+              >
+                Location
+              </Tabs.Trigger>
+            </Tabs.List>
+
+            <Tabs.Content mt={"16px"} value="About" className="mt-4">
+              <AboutSummary />
+            </Tabs.Content>
+            {/* <Tabs.Indicator /> */}
+
+            <Tabs.Content mt={"16px"} value="Location" className="mt-4">
+              {" "}
+              <LoactionSummary />
+            </Tabs.Content>
+
+            <Tabs.Content mt={"16px"} value="Amenities" className="mt-4">
+              <AmenitiesSummary />
+            </Tabs.Content>
+
+            <Tabs.Content mt={"16px"} value="Reviews" className="mt-4">
+              <ReviewsSummary />
+            </Tabs.Content>
+          </Tabs.Root>
+        </Box>
+
+        {/* Right Column: Pricing / Reserve */}
+        <Box
+          position="sticky"
+          top={4}
+          flex={1}
+          shadow={"md"}
+          h={"100%"}
+          w={"100%"}
+          borderRadius={"16px"}
+          pb={8}
+        >
+          <PaymentCard />
+        </Box>
+      </Flex>
+    </Box>
+  );
+};
+
+export default Summary;
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+"use client";
+
+import React, { useState } from "react";
+
+import { useListingCreationContext } from "@/context/ListingCreationContext";
+import {
+  Box,
+  Flex,
+  Button,
+  Heading,
+  Text,
+  Card,
+  IconButton,
+  VStack,
+  HStack,
+  Tabs,
+} from "@chakra-ui/react";
+import {
+  Star,
+  Users,
+  Bed,
+  Bath,
+  Share,
+  Heart,
+  Home,
+  StarIcon,
+  Award,
+  TrendingUp,
+  MessageCircle,
+  Package,
+  Plus,
+  Minus,
+  DoorOpen,
+  CigaretteOff,
+  Music,
+  Clock,
+  PawPrint,
+  Moon,
+  Share2,
+} from "lucide-react";
+
+// A reusable component for a pack card with its own quantity state and functions.
+const PackCard = ({ title, description, price }) => {
+  const [quantity, setQuantity] = useState(1);
+
+  // Function to increment the pack quantity
+  const increment = () => {
+    setQuantity((prev) => prev + 1);
+  };
+
+  // Function to decrement the pack quantity (ensuring at least 1 is selected)
+  const decrement = () => {
+    setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+  };
+  
+
+  return (
+    <Box
+      w={"480px"}
+      h={"350px"}
+      bg={"white"}
+      shadow={"md"}
+      borderRadius={"16px"}
+      display={"flex"}
+      flexDir={"column"}
+      alignItems={"start"}
+      justifyContent={"start"}
+    >
+      <Box
+        w={"100%"}
+        h={"500px"}
+        bg={"gray.100"}
+        borderRadius={"16px"}
+        borderBottomRadius={"0px"}
+      ></Box>
+
+      <Box p={4} w={"100%"} h={"100%"}>
+        <HStack align={"center"} gap={2}>
+          <Package />
+          <Text fontWeight={"semibold"} fontSize={"18px"}>
+            {title}
+          </Text>
+        </HStack>
+        <Box mt={2}>
+          <Text fontSize={"16px"} color={"gray.600"}>
+            {description}
+          </Text>
+        </Box>
+      </Box>
+
+      <HStack
+        p={4}
+        w={"100%"}
+        gap={2}
+        mt={8}
+        align={"center"}
+        justify={"space-between"}
+      >
+        <Text fontWeight={"semibold"} fontSize={"32px"}>
+          ${price}
+        </Text>
+        <HStack>
+          <Box
+            as={"button"}
+            p={1}
+            border={"1px solid lightgray"}
+            rounded={"6px"}
+            onClick={increment}
+          >
+            <Plus />
+          </Box>
+          <Box
+            as={"button"}
+            p={1}
+            rounded={"6px"}
+            fontWeight={"semibold"}
+            fontSize={"18px"}
+          >
+            {quantity}
+          </Box>
+          <Box
+            as={"button"}
+            p={1}
+            border={"1px solid lightgray"}
+            rounded={"6px"}
+            onClick={decrement}
+          >
+            <Minus />
+          </Box>
+        </HStack>
+      </HStack>
+    </Box>
+  );
+};
+
+const AboutSummary = () => {
+ const {
+    season,
+        setSeason,
+        progress,
+        setProgress,
+        selectedProperty,
+        setSelectedProperty,
+        title,
+        setTitle,
+        description,
+        setDescription,
+        address,
+        setAddress,
+        mapUrl,
+        setMapUrl,
+        addedRooms,
+        setAddedRooms,
+        addRoomProgress,
+        setAddRoomProgress,
+        uploadedFiles,
+        setUploadedFiles,
+        imageDetails,
+        setImageDetails,
+        basePrice,
+        setBasePrice,
+        minPrice,
+        setMinPrice,
+        maxPrice,
+        setMaxPrice,
+        weekendAdjustment,
+        setWeekendAdjustment,
+        seasonalAdjustment,
+        setSeasonalAdjustment,
+        packageDiscounts,
+        setPackageDiscounts,
+        rules,
+        setRules,
+        recommendations,
+        setRecommendations,
+        packs,
+        setPacks,
+        selectedAmenities,
+        setSelectedAmenities,
+        customAmenity,
+        setCustomAmenity,
+        selectedTab,
+        setSelectedTab,
+        prices,
+        setPrices,
+        selectedDates,
+        setSelectedDates,
+        loadingInsights,
+        setLoadingInsights,
+        insights,
+        setInsights,
+        editDialogOpen,
+        setEditDialogOpen,
+        editRate,
+        setEditRate,
+  } = useListingCreationContext();
+  console.log({
+    season,
+    selectedProperty,
+    title,
+    description,
+    address,
+    mapUrl,
+    addedRooms,
+    addRoomProgress,
+    uploadedFiles,
+    imageDetails,
+    basePrice,
+    minPrice,
+    maxPrice,
+    weekendAdjustment,
+    seasonalAdjustment,
+    packageDiscounts,
+    rules,
+    recommendations,
+    packs,
+    selectedAmenities,
+    customAmenity,
+    selectedTab,
+    prices,
+    selectedDates,
+    loadingInsights,
+    insights,
+    editDialogOpen,
+    editRate,
+  });
+  return (
+    <>
+      <Box>
+        <Text fontSize={["24px", "30px", "30px"]} fontWeight="bold" mb="8px">
+          About this crib
+        </Text>
+        <Text fontSize={["24px", "30px", "16px"]} color={"gray.600"} mb="8px">
+         {description}
+        </Text>
+        <HStack></HStack>
+      </Box>
+
+      <HStack gap={4} mt={"16px"} w={"100%"} justify={"space-between"}>
+        <HStack gap={3}>
+          <Box as={Users} boxSize={6} color="gray.600" />
+          <VStack gap={0} align={"start"}>
+            <Text fontWeight={"semibold"}>
+              {addedRooms.length || 0} guests
+            </Text>
+          
+          </VStack>
+        </HStack>
+        <HStack gap={3}>
+          <Box as={Bed} boxSize={6} color="gray.600" />
+          <VStack gap={0} align={"start"}>
+            <Text fontWeight={"semibold"}>
+              {addedRooms.length || 0} Rooms
+            </Text>
+           
+          </VStack>
+        </HStack>
+        <HStack gap={3}>
+          <Box as={Bath} boxSize={6} color="gray.600" />
+          <VStack gap={0} align={"start"}>
+            <Text fontWeight={"semibold"}>
+              {addedRooms.length || 0} Bathroom
+            </Text>
+          
+          </VStack>
+        </HStack>
+        <HStack gap={3}>
+          <Box as={Home} boxSize={6} color="gray.600" />
+          <VStack gap={0} align={"start"}>
+            <Text fontWeight={"semibold"}>
+              {selectedProperty}
+            </Text>
+          
+          </VStack>
+        </HStack>
+      </HStack>
+
+      <Box w={"100%"} bg={"lightgray"} h={"1px"} my={"32px"} />
+
+      {/* Awards & Recognition */}
+      <Box>
+        <Text fontSize={"24px"} fontWeight="bold" my="24px">
+          Awards & Recognition
+        </Text>
+
+        <HStack
+          w={"100%"}
+          h={"150px"}
+          justify={"space-between"}
+          gap={2}
+          align={"start"}
+        >
+          <Box
+            w={"100%"}
+            h={"100%"}
+            bg={"purple.100"}
+            borderRadius={"16px"}
+            display={"flex"}
+            flexDir={"column"}
+            alignItems={"center"}
+            justifyContent={"center"}
+          >
+            <Award size={"32px"} color="#A855F7" />
+            <Text mt={"8px"} fontWeight={"semibold"} fontSize={"18px"}>
+              Crib Overlord
+            </Text>
+            <Text fontSize={"16px"} color={"gray.600"}>
+              5 years of excellence
+            </Text>
+          </Box>
+          <Box
+            w={"100%"}
+            h={"100%"}
+            bg={"red.100"}
+            borderRadius={"16px"}
+            display={"flex"}
+            flexDir={"column"}
+            alignItems={"center"}
+            justifyContent={"center"}
+          >
+            <Heart size={"32px"} color="red" />
+            <Text mt={"8px"} fontWeight={"semibold"} fontSize={"18px"}>
+              Guests' Favorite
+            </Text>
+            <Text fontSize={"16px"} color={"gray.600"}>
+              Saved by 1000+
+            </Text>
+          </Box>
+          <Box
+            w={"100%"}
+            h={"100%"}
+            bg={"green.100"}
+            borderRadius={"16px"}
+            display={"flex"}
+            flexDir={"column"}
+            alignItems={"center"}
+            justifyContent={"center"}
+          >
+            <TrendingUp size={"32px"} color="#22C55E" />
+            <Text mt={"8px"} fontWeight={"semibold"} fontSize={"18px"}>
+              High Demand
+            </Text>
+            <Text fontSize={"16px"} color={"gray.600"}>
+              Booked 95% of the time
+            </Text>
+          </Box>
+          <Box
+            w={"100%"}
+            h={"100%"}
+            bg={"blue.100"}
+            borderRadius={"16px"}
+            display={"flex"}
+            flexDir={"column"}
+            alignItems={"center"}
+            justifyContent={"center"}
+          >
+            <Star size={"32px"} color="#3B82F6" />
+            <Text mt={"8px"} fontWeight={"semibold"} fontSize={"18px"}>
+              Top Rated
+            </Text>
+            <Text fontSize={"16px"} color={"gray.600"}>
+              4.9 out of 5 stars
+            </Text>
+          </Box>
+        </HStack>
+      </Box>
+
+      <Box w={"100%"} bg={"lightgray"} h={"1px"} my={"32px"} />
+
+      {/* Host Information */}
+      <Box
+        w={"100%"}
+        h={"100%"}
+        border={"1px solid lightgray"}
+        borderRadius={"16px"}
+        p={4}
+        px={6}
+      >
+        <HStack gap={2}>
+          <Box p={8} borderRadius={"full"} bg={"gray.200"}></Box>
+          <VStack gap={0} align={"start"}>
+            <HStack w={"100%"} justify={"center"} align={"center"} gap={4}>
+              <Text fontWeight={"semibold"} fontSize={"24px"}>
+                Emma
+              </Text>
+              <Box>
+                <Box
+                  w={"fit-content"}
+                  bg="linear-gradient(135deg, rgba(103,58,183,1) 40%, rgba(69,123,207,1) 100%)"
+                  py={1}
+                  px={4}
+                  rounded={"full"}
+                  display={"flex"}
+                  alignItems={"center"}
+                  justifyContent={"center"}
+                  gap={1}
+                  fontWeight={"semibold"}
+                  color={"white"}
+                  fontSize={"12px"}
+                >
+                  <Award color="white" size={"18px"} /> Crib Overlord
+                </Box>
+              </Box>
+            </HStack>
+            <Text color={"gray.600"}>Joined in 2018</Text>
+          </VStack>
+        </HStack>
+        <HStack mt={4} w={"100%"}>
+          <VStack align={"start"} w={"100%"}>
+            <Text fontWeight={"semibold"} fontSize={"16px"}>
+              100% response rate
+            </Text>
+            <Text color={"gray.600"}>Responds within an hour</Text>
+          </VStack>
+          <VStack align={"start"} w={"100%"}>
+            <HStack gap={2} justify={"center"} align={"center"}>
+              <Text fontWeight={"semibold"} fontSize={"16px"}>
+                4.9
+              </Text>
+              <Star size={"18px"} color="orange" />
+            </HStack>
+            <Text color={"gray.600"}>186 reviews</Text>
+          </VStack>
+        </HStack>
+        <Box w={"100%"} mt={4}>
+          <Text fontSize={"16px"}>
+            Hi, I'm Emma! I'm a passionate traveler and love to share the beauty
+            of Malibu with guests from around the world. As a local, I can
+            provide insider tips on the best beaches, restaurants, and hidden
+            gems in the area.
+          </Text>
+        </Box>
+        <Box
+          as={"button"}
+          gap={2}
+          w={"100%"}
+          h={"50px"}
+          mt={"24px"}
+          bg={"black"}
+          borderRadius={"16px"}
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          transition={"all 0.3s"}
+          _hover={{ bg: "gray.700", color: "black" }}
+        >
+          <MessageCircle color="white" size={"18px"} />
+          <Text color={"white"} fontWeight={"semibold"} fontSize={"14px"}>
+            Contact Host
+          </Text>
+        </Box>
+      </Box>
+
+      {/* Enhance Your Stay with Packs Section */}
+      <Box>
+        <Text fontSize={"24px"} fontWeight="bold" my="24px">
+          Enhance Your Stay with Packs
+        </Text>
+        <HStack
+          w={"100%"}
+          justify={"space-between"}
+          align={"start"}
+          flexWrap={{ base: "wrap", md: "wrap" }}
+          gap={4}
+        >
+           {packs.map((pack) => (
+      <PackCard
+        key={pack.id}
+        title={pack.title}
+        description={pack.description}
+        price={pack.price}
+      />
+    ))}
+        </HStack>
+      </Box>
+
+      {/* Unique Adventures Nearby Section */}
+      <Box>
+        <Text fontSize={"24px"} fontWeight="bold" my="24px">
+          Unique Adventures Nearby
+        </Text>
+        <HStack
+          w={"100%"}
+          justify={"space-between"}
+          align={"start"}
+          flexWrap={{ base: "wrap", md: "wrap" }}
+          gap={4}
+        >
+          <PackCard
+            title="Beach Essentials"
+            description="Beach towels, Umbrellas, Snorkeling Gear, Cooler, Beach towels, Umbrellas, Snorkeling Gear, Cooler"
+            price={50}
+          />
+          <PackCard
+            title="Beach Essentials"
+            description="Beach towels, Umbrellas, Snorkeling Gear, Cooler"
+            price={50}
+          />
+        </HStack>
+      </Box>
+
+      {/* House Rules Section */}
+      <Box>
+        <Text fontSize={"24px"} fontWeight="bold" my="24px">
+          House Rules
+        </Text>
+        <Box
+          w={"100%"}
+          border={"1px solid lightgray"}
+          borderRadius={"16px"}
+          p={4}
+          px={6}
+        >
+          <HStack gap={4}>
+            <VStack w={"100%"} align={"start"} gap={6}>
+              <HStack gap={3}>
+                <Box as={DoorOpen} boxSize={6} color="gray.600" />
+                <VStack align={"start"}>
+                  <Text fontWeight={"semibold"}>
+                    {addedRooms.length || 0} Check-in
+                  </Text>
+                  <Text color="gray.600">4</Text>
+                </VStack>
+              </HStack>
+              <HStack gap={3}>
+                <Box as={CigaretteOff} boxSize={6} color="gray.600" />
+                <VStack align={"start"}>
+                  <Text fontWeight={"semibold"}>
+                    {addedRooms.length || 0} No smoking
+                  </Text>
+                  <Text color="gray.600">
+                    Strictly prohibited inside the property
+                  </Text>
+                </VStack>
+              </HStack>
+              <HStack gap={3}>
+                <Box as={Music} boxSize={6} color="gray.600" />
+                <VStack align={"start"}>
+                  <Text fontWeight={"semibold"}>
+                    {addedRooms.length || 0} No parties or events
+                  </Text>
+                  <Text color="gray.600">
+                    Not suitable for large gatherings
+                  </Text>
+                </VStack>
+              </HStack>
+            </VStack>
+            <VStack w={"100%"} align={"start"} gap={6}>
+              <HStack gap={3}>
+                <Box as={Clock} boxSize={6} color="gray.600" />
+                <VStack align={"start"}>
+                  <Text fontWeight={"semibold"}>
+                    {addedRooms.length || 0} Checkout
+                  </Text>
+                  <Text color="gray.600">11</Text>
+                </VStack>
+              </HStack>
+              <HStack gap={3}>
+                <Box as={PawPrint} boxSize={6} color="gray.600" />
+                <VStack align={"start"}>
+                  <Text fontWeight={"semibold"}>
+                    {addedRooms.length || 0} No pets
+                  </Text>
+                  <Text color="gray.600">
+                    Unfortunately, we cannot accommodate pets
+                  </Text>
+                </VStack>
+              </HStack>
+              <HStack gap={3}>
+                <Box as={Moon} boxSize={6} color="gray.600" />
+                <VStack align={"start"}>
+                  <Text fontWeight={"semibold"}>
+                    {addedRooms.length || 0} Quiet hours
+                  </Text>
+                  <Text color="gray.600">10</Text>
+                </VStack>
+              </HStack>
+            </VStack>
+          </HStack>
+          <Box mt={4} fontSize={"16px"} fontStyle="italic" color={"gray.600"}>
+            Please respect these house rules to ensure a comfortable stay for
+            everyone. Violation may result in additional fees or termination of
+            your stay.
+          </Box>
+        </Box>
+      </Box>
+    </>
+  );
+};
+
+export default AboutSummary;
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+import React from "react";
+import { Box, HStack, VStack, Text } from "@chakra-ui/react";
+import {
+  AirVent,
+  AlarmCheck,
+  CarFront,
+  ChefHat,
+  Gamepad,
+  HeaterIcon,
+  Lock,
+  Tv,
+  Wifi,
+} from "lucide-react";
+import { IconFirstAidKit, IconGrill, IconPool } from "@tabler/icons-react";
+import { useListingCreationContext } from "@/context/ListingCreationContext";
+const AmenitiesSummary = () => {
+  const selectedAmenities = [
+    "Wi-Fi",
+    "Smart TV",
+    "Streaming services",
+    "Work space",
+    "Charging station",
+    "Air conditioning",
+    "Heating",
+    "Washer",
+    "Iron",
+    "Dryer",
+    "Microwave",
+    "Coffee maker",
+    "Barbecue grill",
+    "Kitchen",
+    "Free parking",
+    "EV charger",
+    "Pool",
+    "Hot tub",
+    "Garden",
+    "Patio",
+    "Yoga mat",
+    "Elevator",
+    "Wheelchair",
+    "Step-free",
+    "Gym",
+  ];
+
+  // const {
+  //   season,
+  //   setSeason,
+  //   progress,
+  //   setProgress,
+  //   selectedProperty,
+  //   setSelectedProperty,
+  //   title,
+  //   setTitle,
+  //   description,
+  //   setDescription,
+  //   address,
+  //   setAddress,
+  //   mapUrl,
+  //   setMapUrl,
+  //   addedRooms,
+  //   setAddedRooms,
+  //   addRoomProgress,
+  //   setAddRoomProgress,
+  //   uploadedFiles,
+  //   setUploadedFiles,
+  //   imageDetails,
+  //   setImageDetails,
+  //   basePrice,
+  //   setBasePrice,
+  //   minPrice,
+  //   setMinPrice,
+  //   maxPrice,
+  //   setMaxPrice,
+  //   weekendAdjustment,
+  //   setWeekendAdjustment,
+  //   seasonalAdjustment,
+  //   setSeasonalAdjustment,
+  //   packageDiscounts,
+  //   setPackageDiscounts,
+  //   rules,
+  //   setRules,
+  //   recommendations,
+  //   setRecommendations,
+  //   packs,
+  //   setPacks,
+  //   selectedAmenities,
+  //   setSelectedAmenities,
+  //   customAmenity,
+  //   setCustomAmenity,
+  //   selectedTab,
+  //   setSelectedTab,
+  //   prices,
+  //   setPrices,
+  //   selectedDates,
+  //   setSelectedDates,
+  //   loadingInsights,
+  //   setLoadingInsights,
+  //   insights,
+  //   setInsights,
+  //   editDialogOpen,
+  //   setEditDialogOpen,
+  //   editRate,
+  //   setEditRate,
+  // } = useListingCreationContext();
+  return (
+    <Box>
+      <Text fontSize={["24px", "30px", "30px"]} fontWeight="bold" mb="8px">
+        Indulge in These Amenities
+      </Text>
+
+      <HStack mt={"16px"} w={"100%"} justify={"space-between"} align={"start"}>
+        <Box
+          w={"100%"}
+          h={"100%"}
+          border={"1px solid lightgray"}
+          borderRadius={"16px"}
+          p={4}
+          px={6}
+        >
+          {" "}
+          <Text fontWeight={"semibold"} fontSize={"24px"} mb={4}>
+            Essentials
+          </Text>
+          <HStack w={"100%"} gap={4}>
+            <VStack w={"100%"} align={"start"} justify={"start"} gap={6}>
+              <HStack gap={3}>
+                <Box as={Wifi} boxSize={6} color="gray.600" />
+                <VStack gap={0} justify={"start"} align={"start"}>
+                  <Text fontWeight={"semibold"}>Free Wi-Fi</Text>
+                </VStack>
+              </HStack>
+              <HStack gap={3}>
+                <Box as={ChefHat} boxSize={6} color="gray.600" />
+                <VStack gap={0} justify={"start"} align={"start"}>
+                  <Text fontWeight={"semibold"}>Fully Equipped Kitchen</Text>
+                </VStack>
+              </HStack>
+              <HStack gap={3}>
+                <Box as={AirVent} boxSize={6} color="gray.600" />
+                <VStack gap={0} justify={"start"} align={"start"}>
+                  <Text fontWeight={"semibold"}>Air Conditioning</Text>
+                </VStack>
+              </HStack>
+            </VStack>
+          </HStack>
+        </Box>
+
+        <Box
+          w={"100%"}
+          h={"100%"}
+          border={"1px solid lightgray"}
+          borderRadius={"16px"}
+          p={4}
+          px={6}
+        >
+          <Text fontWeight={"semibold"} fontSize={"24px"} mb={4}>
+            Facilities
+          </Text>
+          <HStack w={"100%"} gap={4}>
+            <VStack w={"100%"} align={"start"} justify={"start"} gap={6}>
+              <HStack gap={3}>
+                <Box as={HeaterIcon} boxSize={6} color="gray.600" />
+                <VStack gap={0} justify={"start"} align={"start"}>
+                  <Text fontWeight={"semibold"}>Heating</Text>
+                </VStack>
+              </HStack>
+              <HStack gap={3}>
+                <Box as={CarFront} boxSize={6} color="gray.600" />
+                <VStack gap={0} justify={"start"} align={"start"}>
+                  <Text fontWeight={"semibold"}>Free Parking</Text>
+                </VStack>
+              </HStack>
+              <HStack gap={3}>
+                <Box as={IconPool} boxSize={6} color="gray.600" />
+                <VStack gap={0} justify={"start"} align={"start"}>
+                  <Text fontWeight={"semibold"}>Swimming Pool</Text>
+                </VStack>
+              </HStack>
+            </VStack>
+          </HStack>
+        </Box>
+      </HStack>
+      <HStack mt={"16px"} w={"100%"} justify={"space-between"} align={"start"}>
+        <Box
+          w={"100%"}
+          h={"100%"}
+          border={"1px solid lightgray"}
+          borderRadius={"16px"}
+          p={4}
+          px={6}
+        >
+          <Text fontWeight={"semibold"} fontSize={"24px"} mb={4}>
+            Safety
+          </Text>
+          <HStack w={"100%"} gap={4}>
+            <VStack w={"100%"} align={"start"} justify={"start"} gap={6}>
+              <HStack gap={3}>
+                <Box as={Lock} boxSize={6} color="gray.600" />
+                <VStack gap={0} justify={"start"} align={"start"}>
+                  <Text fontWeight={"semibold"}>Security system</Text>
+                </VStack>
+              </HStack>
+              <HStack gap={3}>
+                <Box as={IconFirstAidKit} boxSize={6} color="gray.600" />
+                <VStack gap={0} justify={"start"} align={"start"}>
+                  <Text fontWeight={"semibold"}>First aid kit</Text>
+                </VStack>
+              </HStack>
+              <HStack gap={3}>
+                <Box as={AlarmCheck} boxSize={6} color="gray.600" />
+                <VStack gap={0} justify={"start"} align={"start"}>
+                  <Text fontWeight={"semibold"}>Smoke alarm</Text>
+                </VStack>
+              </HStack>
+            </VStack>
+          </HStack>
+        </Box>
+
+        <Box
+          w={"100%"}
+          h={"100%"}
+          border={"1px solid lightgray"}
+          borderRadius={"16px"}
+          p={4}
+          px={6}
+        >
+          <Text fontWeight={"semibold"} fontSize={"24px"} mb={4}>
+            Entertainment
+          </Text>
+          <HStack w={"100%"} gap={4}>
+            <VStack w={"100%"} align={"start"} justify={"start"} gap={6}>
+              <HStack gap={3}>
+                <Box as={IconGrill} boxSize={6} color="gray.600" />
+                <VStack gap={0} justify={"start"} align={"start"}>
+                  <Text fontWeight={"semibold"}>BBQ grill</Text>
+                </VStack>
+              </HStack>
+              <HStack gap={3}>
+                <Box as={Tv} boxSize={6} color="gray.600" />
+                <VStack gap={0} justify={"start"} align={"start"}>
+                  <Text fontWeight={"semibold"}>Home theater</Text>
+                </VStack>
+              </HStack>
+              <HStack gap={3}>
+                <Box as={Gamepad} boxSize={6} color="gray.600" />
+                <VStack gap={0} justify={"start"} align={"start"}>
+                  <Text fontWeight={"semibold"}>Game console</Text>
+                </VStack>
+              </HStack>
+            </VStack>
+          </HStack>
+        </Box>
+      </HStack>
+      <Box
+        as={"button"}
+        gap={2}
+        w={"100%"}
+        h={"50px"}
+        mt={"24px"}
+        bg={"black"}
+        borderRadius={"16px"}
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        transition={"all 0.3s"}
+        _hover={{
+          bg: "gray.700",
+          color: "black",
+        }}
+      >
+        <Text color={"white"} fontWeight={"semibold"} fontSize={"14px"}>
+          {" "}
+          Expand Amenities
+        </Text>
+      </Box>
+    </Box>
+  );
+};
+
+export default AmenitiesSummary;
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+import {
+  Box,
+  Flex,
+  Button,
+  Heading,
+  Text,
+  Card,
+  IconButton,
+  VStack,
+  HStack,
+  Tabs,
+} from "@chakra-ui/react";
+import React from "react";
+import { useListingCreationContext } from "@/context/ListingCreationContext";
+import { Amphora, Landmark, MapPin, Store, Utensils } from "lucide-react";
+const LoactionSummary = () => {
+  const {
+    title,
+    description,
+    basePrice,
+    uploadedFiles,
+    addedRooms,
+    address,
+    mapUrl,
+    packs,
+    imageDetails,
+    rules,
+  } = useListingCreationContext();
+  return (
+    <>
+      <Box>
+        <Text fontSize={["24px", "30px", "30px"]} fontWeight="bold" mb="8px">
+          Where you'll be
+        </Text>
+        <VStack mt={"16px"}>
+          <HStack w={"100%"} justify={"start"} align={"start"} h={"100%"}>
+            <Box as={MapPin} boxSize={6} color="gray.600" />
+            <Text
+              fontSize={["24px", "30px", "18px"]}
+              fontWeight={"semibold"}
+              mb="8px"
+            >
+              123 Ocean View Drive, Malibu, California 90265, United States
+            </Text>
+          </HStack>
+
+          <Text fontSize={["24px", "30px", "16px"]} color={"gray.600"} mb="8px">
+            Located in an exclusive neighborhood, just steps away from a
+            pristine private beach. High-end restaurants and boutique shops are
+            within a short drive. Enjoy breathtaking sunsets and the sound of
+            waves from your private terrace.
+          </Text>
+        </VStack>
+      </Box>
+
+      {mapUrl ? (
+        <Box mt={"16px"} borderRadius="xl" overflow="hidden">
+          <iframe
+            src={mapUrl}
+            width="100%"
+            height="350"
+            allowFullScreen
+            loading="lazy"
+            style={{ border: 0 }}
+          />
+        </Box>
+      ) : (
+        <Text>No map available</Text>
+      )}
+
+      <Text
+        mt={"16px"}
+        fontSize={["24px", "30px", "30px"]}
+        fontWeight="bold"
+        mb="8px"
+      >
+        Nearby attractions
+      </Text>
+      <HStack
+        mt={"16px"}
+        w={"100%"}
+        justify={"start"}
+        align={"center"}
+        h={"100%"}
+      >
+        {" "}
+        <Box
+          bg={"gray.100"}
+          w={"100%"}
+          h={"85px"}
+          p={2}
+          borderRadius={"16px"}
+          _hover={{ bg: "gray.300" }}
+          transition={"all 0.3s"}
+          cursor={"pointer"}
+        >
+          <HStack
+            gap={3}
+            w={"100%"}
+            h={"100%"}
+            justify={"start"}
+            align={"center"}
+          >
+            <Box color="gray.600" p={2} bg={"white"} rounded={"full"}>
+              <Amphora />
+            </Box>
+            <VStack gap={0} justify={"start"} align={"start"}>
+              <Text fontWeight={"semibold"}>Nobu Malibu</Text>
+              <HStack>
+                <Box p={1} bg={"green.500"} borderRadius={"full"} />
+                <Text color="gray.600">4</Text>
+              </HStack>
+            </VStack>
+          </HStack>{" "}
+        </Box>
+        <Box
+          bg={"gray.100"}
+          w={"100%"}
+          h={"85px"}
+          p={2}
+          borderRadius={"16px"}
+          cursor={"pointer"}
+          _hover={{ bg: "gray.300" }}
+          transition={"all 0.3s"}
+        >
+          <HStack
+            gap={3}
+            w={"100%"}
+            h={"100%"}
+            justify={"start"}
+            align={"center"}
+          >
+            <Box color="gray.600" p={2} bg={"white"} rounded={"full"}>
+              <Utensils />
+            </Box>
+            <VStack gap={0} justify={"start"} align={"start"}>
+              <Text fontWeight={"semibold"}>Nobu Malibu</Text>
+              <HStack>
+                <Box p={1} bg={"green.500"} borderRadius={"full"} />
+                <Text color="gray.600">4.0</Text>
+              </HStack>
+            </VStack>
+          </HStack>{" "}
+        </Box>
+      </HStack>
+      <HStack
+        mt={"16px"}
+        w={"100%"}
+        justify={"start"}
+        align={"center"}
+        h={"100%"}
+      >
+        {" "}
+        <Box
+          bg={"gray.100"}
+          w={"100%"}
+          h={"85px"}
+          p={2}
+          borderRadius={"16px"}
+          cursor={"pointer"}
+          _hover={{ bg: "gray.300" }}
+          transition={"all 0.3s"}
+        >
+          <HStack
+            gap={3}
+            w={"100%"}
+            h={"100%"}
+            justify={"start"}
+            align={"center"}
+          >
+            <Box color="gray.600" p={2} bg={"white"} rounded={"full"}>
+              <Landmark />
+            </Box>
+            <VStack gap={0} justify={"start"} align={"start"}>
+              <Text fontWeight={"semibold"}>Nobu Malibu</Text>
+              <HStack>
+                <Box p={1} bg={"green.500"} borderRadius={"full"} />
+                <Text color="gray.600">4</Text>
+              </HStack>
+            </VStack>
+          </HStack>{" "}
+        </Box>
+        <Box
+          bg={"gray.100"}
+          w={"100%"}
+          h={"85px"}
+          p={2}
+          cursor={"pointer"}
+          borderRadius={"16px"}
+          _hover={{ bg: "gray.300" }}
+          transition={"all 0.3s"}
+        >
+          <HStack
+            gap={3}
+            w={"100%"}
+            h={"100%"}
+            justify={"start"}
+            align={"center"}
+          >
+            <Box color="gray.600" p={2} bg={"white"} rounded={"full"}>
+              <Store />
+            </Box>
+            <VStack gap={0} justify={"start"} align={"start"}>
+              <Text fontWeight={"semibold"}>Nobu Malibu</Text>
+              <HStack>
+                <Box p={1} bg={"green.500"} borderRadius={"full"} />
+                <Text color="gray.600">4</Text>
+              </HStack>
+            </VStack>
+          </HStack>{" "}
+        </Box>
+      </HStack>
+    </>
+  );
+};
+
+export default LoactionSummary;
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+import React from "react";
+import { Box, HStack, VStack, Text } from "@chakra-ui/react";
+import { StarIcon } from "lucide-react";
+import { Rating } from "@/components/chakra-snippets/rating";
+
+const ReviewsSummary = () => {
+  return (
+    <Box>
+      <Text fontSize={["24px", "30px", "30px"]} fontWeight="bold" mb="8px">
+      Reviews
+      </Text>
+      <HStack align={"start"} w={"100%"} h={"100%"} gap={2} mt={"16px"} justify={"space-between"}>
+        <VStack w={"60%"} h={"100%"} justify={"start"} align={"start"}>
+          <HStack w={"100%"} h={"100%"} gap={2}>
+            <StarIcon fill="true" size={36} />
+            <HStack justify={"center"}>
+              <Text fontWeight={"bold"} fontSize={"52px"}>
+                4.6
+              </Text>
+              <Text fontSize={"24px"}>/ 5</Text>
+            </HStack>
+          </HStack>
+          <Text fontSize={"24px"} fontWeight={"medium"}>245 reviews</Text>
+
+          {[
+            { stars: 5, percentage: "70%", count: 172 },
+            { stars: 4, percentage: "20%", count: 49 },
+            { stars: 3, percentage: "6%", count: 15 },
+            { stars: 2, percentage: "3%", count: 6 },
+            { stars: 1, percentage: "1%", count: 3 },
+          ].map((rating, index) => (
+            <HStack key={index} gap={3} w={"100%"}>
+              <VStack gap={0} justify={"start"} align={"start"} w={"100%"}>
+                <HStack>
+                  <Rating defaultValue={rating.stars} allowHalf colorPalette="yellow" readOnly size="md" />{" "}
+                  <Text fontWeight={"semibold"}> ({rating.stars} Stars)</Text>
+                </HStack>
+                <Box mt={2} h={"8px"} color="gray.600" w={"300px"} borderRadius={"24px"} bg={"gray.100"}>
+                  <Box w={rating.percentage} h={"100%"} bg={"yellow.300"} borderRadius={"16px"}></Box>
+                </Box>
+                <Text fontSize={"14px"} color={"gray.500"}>{rating.count} reviews</Text>
+              </VStack>
+            </HStack>
+          ))}
+        </VStack>
+
+        {/* REVIEWS SECTION */}
+        <Box w={"100%"} h={"100%"} borderRadius={"16px"}>
+          <Box w={"100%"} h={"100%"} borderLeft={"1px solid lightgray"}  p={4} px={6}>
+            {[
+              {
+                name: "Jake M.",
+                date: "January 2024",
+                rating: 5,
+                review: "Absolutely stunning place! The views were breathtaking, and the amenities were top-notch. The host was very accommodating and made sure we had everything we needed. Will definitely come back!",
+              },
+              {
+                name: "Sophia R.",
+                date: "December 2023",
+                rating: 4,
+                review: "Great experience overall! The location was perfect, and the property was well-maintained. Only small downside was that the WiFi was a bit slow at times, but nothing that ruined our stay.",
+              },
+              {
+                name: "David L.",
+                date: "November 2023",
+                rating: 3,
+                review: "The place was nice, but not quite as luxurious as expected. Some minor maintenance issues, but the staff was responsive and helped fix them quickly.",
+              },
+            ].map((review, index) => (
+              <React.Fragment key={index}>
+                <VStack w={"100%"} justify={"start"} align={"start"}>
+                  <HStack gap={2}>
+                    <Box p={8} borderRadius={"full"} bg={"gray.200"}></Box>
+                    <VStack gap={0} justify={"start"} align={"start"}>
+                      <HStack w={"100%"} justify={"center"} align={"center"} gap={4}>
+                        <Text fontWeight={"semibold"} fontSize={"24px"}>{review.name}</Text>
+                        <Rating defaultValue={review.rating} allowHalf colorPalette="yellow" readOnly size="md" />
+                        <Text fontWeight={"semibold"}> ({review.rating} Stars)</Text>
+                      </HStack>
+                      <Text color={"gray.600"}>{review.date}</Text>
+                    </VStack>
+                  </HStack>
+                  <Box gap={0} w={"100%"} mt={2}>
+                    <Text fontSize={"16px"}>{review.review}</Text>
+                  </Box>
+                </VStack>
+                {index < 2 && <Box w={"100%"} bg={"lightgray"} h={"1px"} my={"16px"} />}
+              </React.Fragment>
+            ))}
+          </Box>
+        </Box>
+      </HStack>
+    </Box>
+  );
+};
+
+export default ReviewsSummary;
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+"use client";
+
+import { VStack, HStack, Text,Box } from "@chakra-ui/react";
+
+import React from "react";
+import { useListingCreationContext } from "@/context/ListingCreationContext";
+const PaymentCard = () => {
+      const {
+        title,
+        description,
+        basePrice,
+        uploadedFiles,
+        addedRooms,
+        address,
+        mapUrl,
+        packs,
+        imageDetails,
+        rules,
+      } = useListingCreationContext();
+  return (
+    <>
+      <Box p={6} fontSize={["24px", "30px", "46px"]} fontWeight="bold">
+        ${basePrice}{" "}
+        <Box
+          as={"span"}
+          fontSize={"24px"}
+          fontWeight="normal"
+          color={"gray.600"}
+        >
+          total{" "}
+        </Box>{" "}
+      </Box>
+
+      <VStack
+        px={6}
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"start"}
+        w={"100%"}
+        h={"100%"}
+        gap={4}
+      >
+        <HStack w={"100%"}>
+          <Box
+            textAlign={"start"}
+            as={"button"}
+            p={2}
+            border={"1px solid lightgray"}
+            rounded={"16px"}
+            onClick={() => console.log(imageDetails)}
+            w={"100%"}
+            transition={"all 0.3s"}
+            _hover={{
+              bg: "black",
+              color: "white",
+            }}
+          >
+            <Text fontWeight={"semibold"}>CHECK-IN</Text>
+            Reserve Now
+          </Box>
+
+          <Box
+            textAlign={"start"}
+            as={"button"}
+            p={2}
+            border={"1px solid lightgray"}
+            rounded={"16px"}
+            onClick={() => console.log(imageDetails)}
+            w={"100%"}
+            transition={"all 0.3s"}
+            _hover={{
+              bg: "black",
+              color: "white",
+            }}
+          >
+            <Text fontWeight={"semibold"}>CHECKOUT</Text>
+            Reserve Now
+          </Box>
+        </HStack>
+
+        <Box
+          p={2}
+          textAlign={"start"}
+          as={"button"}
+          border={"1px solid lightgray"}
+          rounded={"16px"}
+          onClick={() => console.log(imageDetails)}
+          w={"100%"}
+          transition={"all 0.3s"}
+          _hover={{
+            bg: "black",
+            color: "white",
+          }}
+        >
+          <Text fontWeight={"semibold"}>GUEST</Text>1 Adult
+        </Box>
+
+        <Box
+          mt={2}
+          as={"button"}
+          gap={2}
+          w={"100%"}
+          h={"50px"}
+          bg={"black"}
+          borderRadius={"16px"}
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          transition={"all 0.3s"}
+          _hover={{
+            bg: "gray.700",
+            color: "black",
+          }}
+        >
+          <Text color={"white"} fontWeight={"semibold"} fontSize={"18px"}>
+            {" "}
+            Reserve
+          </Text>
+        </Box>
+
+        <HStack w={"100%"} justify={"space-between"} mt={2}>
+          <Text textDecoration={"underline"}>$350 × 0 nights</Text>
+          <Text>$0</Text>
+        </HStack>
+        <HStack w={"100%"} justify={"space-between"}>
+          <Text textDecoration={"underline"}>Cleaning fee</Text>
+          <Text>$350</Text>
+        </HStack>
+        <Box w={"100%"} bg={"lightgray"} h={"1px"} my={"4px"} />
+        <HStack w={"100%"} justify={"space-between"}>
+          <Text fontWeight={"semibold"} fontSize={"18px"}>
+            Total
+          </Text>
+          <Text fontWeight={"semibold"} fontSize={"18px"}>
+            $350
+          </Text>
+        </HStack>
+      </VStack>
+    </>
+  );
+};
+
+export default PaymentCard;
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------

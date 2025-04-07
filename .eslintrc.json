@@ -1,0 +1,36 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript",
+    "standard",
+    "plugin:tailwindcss/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "react/no-unescaped-entities": 0,
+    //remove ----------------------
+    "no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    //remove ----------------------
+    "no-undef": "off"
+    // "@typescript-eslint/no-explicit-any": ["error", { "fixToUnknown": true }]
+  },
+  "settings": {
+    "tailwindcss": {
+      "groupByResponsive": true,
+      "prependCustom": true,
+      "officialSorting": true
+    }
+  }
+}
