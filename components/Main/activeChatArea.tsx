@@ -28,10 +28,15 @@ const ActiveChatArea: React.FC<ActiveChatAreaProps> = ({ userInput }) => {
 
   return (
     <>
-      <Box px={["4%", "4%", "6%", "6%", "6%", "10%"]}>
+
+    
+      <Box px={["4%", "4%", "6%", "6%", "6%", "10%"]} >
+
+        <VStack h={"100%"} >
         <VStack
           className="animate__animated animate__fadeInUp"
           w={"100%"}
+          h={"100%"}
           justify={"end"}
           align={"end"}
           mt={["25px", "25px", "25px", "25px", "25px", "25px"]}
@@ -57,6 +62,7 @@ const ActiveChatArea: React.FC<ActiveChatAreaProps> = ({ userInput }) => {
         <VStack
           className="animate__animated animate__fadeInUp"
           w={"100%"}
+          h={"100%"}
           justify={"start"}
           align={"start"}
           mt={["25px", "25px", "25px", "25px", "25px", "25px"]}
@@ -79,6 +85,8 @@ const ActiveChatArea: React.FC<ActiveChatAreaProps> = ({ userInput }) => {
             <LoadingDots />
           </Text>
         </VStack>
+        </VStack>
+     
 
         <VStack
           px={["4%", "4%", "6%", "6%", "6%", "10%"]}
@@ -87,7 +95,7 @@ const ActiveChatArea: React.FC<ActiveChatAreaProps> = ({ userInput }) => {
           bottom={0}
           zIndex={1000}
           position={"fixed"}
-          mt={["850px", "850px", "400px", "400px", "350px", "150px"]}
+     
           display="flex"
           justify="center"
           align="center"
@@ -96,14 +104,14 @@ const ActiveChatArea: React.FC<ActiveChatAreaProps> = ({ userInput }) => {
           mb={8}
           className="animate__animated animate__fadeIn"
         >
-          <HStack>
+          <HStack justify="start" align="start">
             <Input
               variant="outline"
               textIndent="8"
               autoFocus
               type="text"
               placeholder="All you gotta do is ask..."
-              width={["250px", "350px", "600px", "600px", "800px", "800px"]}
+              width={["250px", "350px", "400px", "600px", "600px", "800px"]}
               height="60px"
               value={input}
               bg="#303030"

@@ -114,38 +114,68 @@ const ChatArea = () => {
     },
   ];
 
+  const group2 = [
+    {
+      onClick: () => setInput("is $MFST a good buy right now?"),
+      icon: <ChartSplineIcon size={32} />,
+      text: (
+        <>
+          Is{" "}
+          <Text
+            as="span"
+            color="green.600"
+            fontWeight={600}
+            textDecor="underline"
+          >
+            $MFST
+          </Text>{" "}
+          a good buy right now?
+        </>
+      ),
+    },
+    {
+      onClick: () => setInput("What are the Top 3 trending stocks right now?"),
+      icon: <Crown size={32} />,
+      text: "What are the Top 3 trending stocks right now?",
+    },
+  ];
+
   return (
     <>
-      <Box
-        display={confirmed || activeChat ? "none" : "block"}
-        transition="all 0.3s ease-in-out"
-        className={`animate__animated ${confirmed || activeChat ? "animate__fadeOut" : "animate__fadeIn"}`}
-      >
-        <Stack
-          px={["4%", "4%", "6%", "6%", "6%", "10%"]}
-          justify="center"
-          align="center"
-          flexDir="row"
-          w="100%"
-          h="120px"
-          gap={4}
-          className="animate__animated animate__fadeIn"
-          flexWrap="wrap"
+      <Box display={confirmed || activeChat ? "none" : "block"}>
+        <Box
+     
+          transition="all 0.3s ease-in-out"
+          className={`animate__animated ${confirmed || activeChat ? "animate__fadeOut" : "animate__fadeIn"}`}
         >
-          {group1.map((item, index) => (
-            <ClickableBox key={index} onClick={item.onClick} icon={item.icon}>
-              {item.text}
-            </ClickableBox>
-          ))}
-        </Stack>
+          <Stack
+          
+            px={["4%", "4%", "6%", "6%", "6%", "10%"]}
+            justify="center"
+            align="center"
+            flexDir="row"
+            w="100%"
+            h="120px"
+            gap={4}
+            className="animate__animated animate__fadeIn"
+            flexWrap={["wrap", "wrap", "wrap", "wrap", "wrap", "wrap"]}
+          >
+            {group1.map((item, index) => (
+              <ClickableBox key={index} onClick={item.onClick} icon={item.icon}>
+                {item.text}
+              </ClickableBox>
+            ))}
+          </Stack>
+
+        </Box>
+
         <Box px={["4%", "4%", "6%", "6%", "6%", "10%"]}>
           <VStack
             w={"100%"}
             left={0}
             bottom={0}
             zIndex={1000}
-            position={"fixed"}
-            mt={["850px", "850px", "400px", "400px", "350px", "150px"]}
+            mt={["850px", "850px", "400px", "400px", "400px", "400px"]}
             display="flex"
             justify="center"
             align="center"
@@ -161,7 +191,7 @@ const ChatArea = () => {
                 autoFocus
                 type="text"
                 placeholder="All you gotta do is ask..."
-                width="800px"
+                width={["250px", "350px", "400px", "600px", "600px", "800px"]}
                 height="60px"
                 value={input}
                 bg="#303030"
@@ -201,17 +231,17 @@ const ChatArea = () => {
                 <CornerDownLeft size={24} />
               </Box>
             </HStack>
-             <Text
-                      mt={"10px"}
-                        color={"gray.400"}
-                        w={"40%"}
-                        textAlign={"center"}
-                        fontSize={["14px", "14px", "14px", "14px", "14px", "14px"]}
-                      >
-                        By using this AI, you acknowledge that it's not legally binding and
-                        that you're responsible for your actions. It's not a substitute for
-                        professional advice.
-                      </Text>
+            <Text
+              mt={"10px"}
+              color={"gray.400"}
+              w={["90%", "90%", "90%", "40%", "40%", "40%"]}
+              textAlign={"center"}
+              fontSize={["14px", "14px", "14px", "14px", "14px", "14px"]}
+            >
+              By using this AI, you acknowledge that it's not legally binding
+              and that you're responsible for your actions. It's not a
+              substitute for professional advice.
+            </Text>
           </VStack>
         </Box>
       </Box>
