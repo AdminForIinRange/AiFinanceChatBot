@@ -37,6 +37,8 @@
     
   }
   body {
+    
+background:  "#212121";
     @apply font-sans antialiased bg-background text-foreground;
     
   }
@@ -48,6 +50,6 @@
 }
 
 html {
-
+background:  "#212121";
   scroll-behavior: smooth;
 }

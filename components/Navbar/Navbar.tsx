@@ -29,6 +29,8 @@ const Navbar = () => {
             fontWeight={500}
             fontSize={["18px", "18px", "24px", "24px", "24px", "24px"]}
             color={"gray.400"}
+            as={"a"}
+            href={"/"}
           >
           AgrAI.
           </Text>
@@ -49,6 +51,7 @@ const Navbar = () => {
             fontWeight={600}
             fontSize={["18px", "18px", "18px", "18px", "18px", "16px"]}
             bg={"#303030"}
+               border="1px solid #7A7A7A"
             _hover={{
               bg: "#404040",
             }}

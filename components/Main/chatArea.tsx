@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Box, Text, Input, Stack, HStack } from "@chakra-ui/react";
+import { Box, Text, Input, Stack, HStack, VStack } from "@chakra-ui/react";
 import {
   ChartSplineIcon,
   Crown,
@@ -10,6 +10,7 @@ import {
   Globe,
   CornerDownLeft,
 } from "lucide-react";
+import ActiveChatArea from "./activeChatArea";
 
 const ClickableBox = ({ onClick, icon, children }) => (
   <Box
@@ -23,7 +24,7 @@ const ClickableBox = ({ onClick, icon, children }) => (
     textAlign="start"
     w="300px"
     h="100%"
-    mt={8}
+    my={2}
     bg="#303030"
     p="18px"
     rounded="lg"
@@ -41,6 +42,8 @@ const ClickableBox = ({ onClick, icon, children }) => (
 
 const ChatArea = () => {
   const [input, setInput] = useState("");
+  const [confirmed, setConfirmed] = useState(false);
+  const [activeChat, setActiveChat] = useState(false);
 
   const group1 = [
     {
@@ -49,7 +52,12 @@ const ChatArea = () => {
       text: (
         <>
           Is{" "}
-          <Text as="span" color="green.600" fontWeight={600} textDecor="underline">
+          <Text
+            as="span"
+            color="green.600"
+            fontWeight={600}
+            textDecor="underline"
+          >
             $MFST
           </Text>{" "}
           a good buy right now?
@@ -67,9 +75,6 @@ const ChatArea = () => {
       icon: <Newspaper size={32} />,
       text: "I recently bought GOLD, any news should i be aware of?",
     },
-  ];
-
-  const group2 = [
     {
       onClick: () =>
         setInput("Summarize the financials for $APPL in the last quarter."),
@@ -77,7 +82,7 @@ const ChatArea = () => {
       text: (
         <>
           Summarize the financials for{" "}
-          <Text as="span" color="white.600" fontWeight={600} textDecor="underline">
+          <Text as="span" color="white" fontWeight={600} textDecor="underline">
             $APPL
           </Text>{" "}
           in the last quarter.
@@ -90,7 +95,12 @@ const ChatArea = () => {
       text: (
         <>
           What is a good entry point for{" "}
-          <Text as="span" color="green.600" fontWeight={600} textDecor="underline">
+          <Text
+            as="span"
+            color="green.600"
+            fontWeight={600}
+            textDecor="underline"
+          >
             $NVDA
           </Text>
         </>
@@ -106,95 +116,112 @@ const ChatArea = () => {
 
   return (
     <>
-      <Stack
-        px={["4%", "4%", "6%", "6%", "6%", "10%"]}
-        justify="center"
-        align="center"
-        flexDir="row"
-        w="100%"
-        h="120px"
-        mb={8}
-        gap={8}
-        className="animate__animated animate__fadeIn"
-        flexWrap="wrap"
+      <Box
+        display={confirmed || activeChat ? "none" : "block"}
+        transition="all 0.3s ease-in-out"
+        className={`animate__animated ${confirmed || activeChat ? "animate__fadeOut" : "animate__fadeIn"}`}
       >
-        {group1.map((item, index) => (
-          <ClickableBox key={index} onClick={item.onClick} icon={item.icon}>
-            {item.text}
-          </ClickableBox>
-        ))}
-      </Stack>
-
-      <Stack
-        px={["4%", "4%", "6%", "6%", "6%", "10%"]}
-        justify="center"
-        align="center"
-        flexDir="row"
-        w="100%"
-        h="100%"
-        mb={8}
-        gap={8}
-        className="animate__animated animate__fadeIn"
-        flexWrap="wrap"
-      >
-        {group2.map((item, index) => (
-          <ClickableBox key={index} onClick={item.onClick} icon={item.icon}>
-            {item.text}
-          </ClickableBox>
-        ))}
-      </Stack>
-
-      <HStack
-        w="100%"
-        display="flex"
-        flexDirection="row"
-        justify="center"
-        align="center"
-        px={["4%", "4%", "6%", "6%", "6%", "10%"]}
-        rounded="lg"
-        p={0}
-        mb={8}
-        className="animate__animated animate__fadeIn"
-      >
-        <Input
-          variant="outline"
-          textIndent="8"
-          autoFocus
-          type="text"
-          placeholder="All you gotta do is ask..."
-          width="800px"
-          height="60px"
-          value={input}
-          bg="#303030"
-          onChange={(e) => setInput(e.target.value)}
-          border="1px solid #7A7A7A"
-          _focus={{
-            border: "1px solid #7A7A7A",
-            boxShadow: "none",
-            outline: "none",
-          }}
-          color="white"
-          rounded="30px"
-          fontSize="16px"
-        />
-
-        <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          width="60px"
-          height="60px"
-          bg="#303030"
-          borderRadius="30px"
-          border="1px solid #7A7A7A"
-          _hover={{ color: "white", rotate: "45deg" }}
-          transition="all 0.3s ease-in-out"
-          cursor="pointer"
-          color={"#7A7A7A"}
+        <Stack
+          px={["4%", "4%", "6%", "6%", "6%", "10%"]}
+          justify="center"
+          align="center"
+          flexDir="row"
+          w="100%"
+          h="120px"
+          gap={4}
+          className="animate__animated animate__fadeIn"
+          flexWrap="wrap"
         >
-          <CornerDownLeft  size={24} />
+          {group1.map((item, index) => (
+            <ClickableBox key={index} onClick={item.onClick} icon={item.icon}>
+              {item.text}
+            </ClickableBox>
+          ))}
+        </Stack>
+        <Box px={["4%", "4%", "6%", "6%", "6%", "10%"]}>
+          <VStack
+            w={"100%"}
+            left={0}
+            bottom={0}
+            zIndex={1000}
+            position={"fixed"}
+            mt={["850px", "850px", "400px", "400px", "350px", "150px"]}
+            display="flex"
+            justify="center"
+            align="center"
+            rounded="lg"
+            p={0}
+            mb={8}
+            className="animate__animated animate__fadeIn"
+          >
+            <HStack>
+              <Input
+                variant="outline"
+                textIndent="8"
+                autoFocus
+                type="text"
+                placeholder="All you gotta do is ask..."
+                width="800px"
+                height="60px"
+                value={input}
+                bg="#303030"
+                onChange={(e) => setInput(e.target.value)}
+                border="1px solid #7A7A7A"
+                _focus={{
+                  border: "1px solid #7A7A7A",
+                  boxShadow: "none",
+                  outline: "none",
+                }}
+                color="white"
+                rounded="30px"
+                fontSize="16px"
+              />
+
+              <Box
+                onClick={() => {
+                  if (input.length > 0) {
+                    setConfirmed(true);
+                    setActiveChat(true);
+                  }
+                }}
+                as="button"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                width="60px"
+                height="60px"
+                bg="#303030"
+                borderRadius="30px"
+                border="1px solid #7A7A7A"
+                _hover={{ color: "white", rotate: "45deg" }}
+                transition="all 0.3s ease-in-out"
+                cursor="pointer"
+                color={"#7A7A7A"}
+              >
+                <CornerDownLeft size={24} />
+              </Box>
+            </HStack>
+             <Text
+                      mt={"10px"}
+                        color={"gray.400"}
+                        w={"40%"}
+                        textAlign={"center"}
+                        fontSize={["14px", "14px", "14px", "14px", "14px", "14px"]}
+                      >
+                        By using this AI, you acknowledge that it's not legally binding and
+                        that you're responsible for your actions. It's not a substitute for
+                        professional advice.
+                      </Text>
+          </VStack>
         </Box>
-      </HStack>
+      </Box>
+      <Box
+        display={activeChat ? "block" : "none"}
+        transition="all 0.3s ease-in-out"
+        className={`animate__animated ${activeChat ? "animate__fadeIn" : "animate__fadeOut"}`}
+      >
+        <ActiveChatArea userInput={input} />
+      </Box>
     </>
   );
 };
