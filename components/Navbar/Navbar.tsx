@@ -32,7 +32,7 @@ const Navbar = () => {
             as={"a"}
             href={"/"}
           >
-          AgrAI.
+          VelvoTrade.
           </Text>
        
         </VStack>

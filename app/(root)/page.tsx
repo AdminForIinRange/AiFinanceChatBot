@@ -6,6 +6,7 @@ import ReactLenis from "lenis/react";
 
 import ChatArea from "@/components/Main/chatArea";
 import Navbar from "@/components/Navbar/Navbar";
+import ActiveChatArea from "@/components/Main/activeChatArea";
 
 const Home = () => {
   // const { user, setUser } = useUser();
@@ -28,7 +29,7 @@ const Home = () => {
     <>
       <ReactLenis root />
 <Navbar />
-      <ChatArea />
+      <ActiveChatArea />
     </>
   );
 };
