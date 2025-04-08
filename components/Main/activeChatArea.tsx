@@ -85,7 +85,7 @@ const ActiveChatArea = () => {
               px={4}
               bg="#303030"
               fontFamily="poppins"
-              fontWeight={500}
+              fontWeight={400}
               fontSize="18px"
               color="gray.400"
               w="fit-content" // Adjust width as needed

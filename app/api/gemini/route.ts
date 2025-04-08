@@ -11,22 +11,31 @@ export async function POST(request: Request) {
     if (!userPrompt) {
       return NextResponse.json(
         { error: "Missing prompt parameter." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
-    let finalPrompt = userPrompt;
-    const financialKeywords = ["stock", "finance", "financial", "investment", "ticker", "share", "market", "economy"]; // Add more keywords as needed
+    const userPromptModified = `You are acting as a seasoned Wall Street investor. The user is asking: "${userPrompt}". Please provide an insightful and analytical response, Format your response using paragraphs and enclose each distinct segment of information within a blockquote (using the '>' symbol).`;
 
-    const isFinancialQuery = financialKeywords.some(keyword =>
-      userPrompt.toLowerCase().includes(keyword)
+    let finalPrompt = userPromptModified;
+    const financialKeywords = [
+      "stock",
+      "finance",
+      "financial",
+      "investment",
+      "ticker",
+      "share",
+      "market",
+      "economy",
+      "$",
+    ]; // Add more keywords as needed
+
+    const isFinancialQuery = financialKeywords.some((keyword) =>
+      userPrompt.toLowerCase().includes(keyword),
     );
-    
 
-
-    
     if (isFinancialQuery) {
-      finalPrompt = `You are acting as a seasoned Wall Street investor. The user is asking: "${userPrompt}". Please provide an insightful and analytical response, considering potential risks and opportunities. **Format your response using paragraphs and enclose each distinct segment of information within a blockquote (using the '>' symbol).** Remember to state clearly that this is not financial advice.`;
+      finalPrompt = ` Remember to state clearly that this is not financial advice.`;
     }
 
     const config = {
@@ -62,7 +71,7 @@ export async function POST(request: Request) {
     console.error("Error in api/gemini route:", error);
     return NextResponse.json(
       { error: "Internal server error", details: error.message },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
