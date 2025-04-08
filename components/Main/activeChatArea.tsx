@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Box, Text, Input, HStack, VStack } from "@chakra-ui/react";
 import { CornerDownLeft } from "lucide-react";
 import ChatArea from "./chatArea";
-
+import ReactMarkdown from 'react-markdown';
 // A small component to animate dots
 const LoadingDots = () => {
   const [dots, setDots] = useState("");
@@ -28,7 +28,6 @@ const ActiveChatArea = () => {
       ...prev,
       { from: "User", text: currentInput },
       { from: "AgrAi", text: "thinking", loading: true },
-      
     ]);
     setIsAiPrompting(true);
     try {
@@ -48,7 +47,6 @@ const ActiveChatArea = () => {
             : msg,
         ),
       );
-   
     } catch (error) {
       console.error("Error:", error);
       setMessages((prev) =>
@@ -58,53 +56,60 @@ const ActiveChatArea = () => {
             : msg,
         ),
       );
-   
     }
   };
 
   return (
     <Box px={["4%", "4%", "6%", "6%", "6%", "10%"]}>
-
-
       <VStack mb="250px" pb={"100px"}>
         {messages.map((msg, idx) => {
           const alignment = msg.from === "User" ? "end" : "start";
           return (
-            <VStack key={idx} w="100%" gap={"15px"} align={alignment} pb={"20px"}>
+            <VStack
+              key={idx}
+              w="100%"
+              gap={"15px"}
+              align={alignment}
+              pb={"20px"}
+            >
               <HStack w="100%" justify={alignment} align="center">
                 <Text color="gray.400" fontWeight={600}>
                   {msg.from}
                 </Text>
               </HStack>
               <HStack w="100%" justify={alignment} align="center">
-                <Text
-                  shadow="md"
-                  rounded="xl"
-                  p={2}
-                  px={4}
-                  bg="#303030"
-                  fontFamily="poppins"
-                  fontWeight={500}
-                  fontSize="18px"
-                  color="gray.400"
-                >
-                  {msg.text} {msg.loading && <LoadingDots />}
-                </Text>
-              </HStack>
+            <Box
+              shadow="md"
+              rounded="xl"
+              p={2}
+              px={4}
+              bg="#303030"
+              fontFamily="poppins"
+              fontWeight={500}
+              fontSize="18px"
+              color="gray.400"
+              w="fit-content" // Adjust width as needed
+            >
+              {msg.from === "AgrAi" ? (
+                <ReactMarkdown>{msg.text}</ReactMarkdown>
+              ) : (
+                <>{msg.text}</>
+              )}
+              {msg.loading && <LoadingDots />}
+            </Box>
+          </HStack>
             </VStack>
           );
         })}
       </VStack>
 
-      <Box
-        display={isAiPrompting ? "none" : "block"}
-     
-      >
+      <Box display={isAiPrompting ? "none" : "block"}>
         <ChatArea />
       </Box>
 
-
       <VStack
+
+      rounded={"15px"}
         px={["4%", "4%", "6%", "6%", "6%", "10%"]}
         position="fixed"
         bottom={0}
@@ -115,9 +120,8 @@ const ActiveChatArea = () => {
         align="center"
         mb={8}
         w={"100%"}
-    
       >
-        <HStack       w={"100%"}> 
+        <HStack w={"100%"} bg={"gray.700"} p={2} borderRadius={"30px"} >
           <Input
             variant="outline"
             textIndent="8"
@@ -151,7 +155,7 @@ const ActiveChatArea = () => {
             justifyContent="center"
             alignItems="center"
             width="60px"
-                 height="70px"
+            height="70px"
             bg="#303030"
             borderRadius="30px"
             border="1px solid #7A7A7A"
