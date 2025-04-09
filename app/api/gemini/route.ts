@@ -15,7 +15,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const userPromptModified = `You are acting as a seasoned Wall Street investor. The user is asking: "${userPrompt}".Please Keep it short and to the point. Please provide an insightful and analytical response, Format your response using paragraphs and enclose each distinct segment of information within a blockquote (using the '>' symbol).`;
+    const userPromptModified = `You are acting as a seasoned Wall Street investor. The user is asking: "${userPrompt}".Please Keep it short and to the point. Please provide an insightful and analytical response, Format your response using paragraphs and enclose each distinct segment of information within a blockquote (using the '>' symbol), if the user is asking a question redgueding financial matter state this is not financial advice but please provide an insightful and analytical response.`;
 
     let finalPrompt = userPromptModified;
 
