@@ -177,8 +177,7 @@ const ActiveChatArea = () => {
           textAlign="center"
           fontSize="14px"
         >
-          By using this AI, you acknowledge that it's not legally binding and
-          you're responsible for your actions.
+          By using this AI, you acknowledge that it's not financial or investment advice and you're responsible for your own financial decisions.
         </Text>
       </VStack>
     </Box>
