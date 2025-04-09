@@ -19,17 +19,17 @@ const ClickableBox = ({ onClick, icon, children }) => (
     display="flex"
     flexDir="column"
     fontFamily="poppins"
-    fontSize="16px"
+    fontSize={["14px", "14px", "16px"]}
     color="gray.400"
     textAlign="start"
-    w="300px"
+    w={["100%", "100%", "300px"]} // Full width on mobile, 300px on larger screens
     h="100%"
     my={2}
     bg="#303030"
-    p="18px"
+    p={["12px", "14px", "18px"]}
     rounded="lg"
     border="1px solid #7A7A7A"
-    _hover={{ bg: "#404040", scale: 1.02 }}
+    _hover={{ bg: "#404040", transform: "scale(1.02)" }}
     transition="all 0.2s ease-in-out"
     cursor="pointer"
   >
@@ -144,21 +144,19 @@ const ChatArea = () => {
     <>
       <Box display={confirmed || activeChat ? "none" : "block"}>
         <Box
-     
           transition="all 0.3s ease-in-out"
           className={`animate__animated ${confirmed || activeChat ? "animate__fadeOut" : "animate__fadeIn"}`}
         >
           <Stack
-          
-            px={["4%", "4%", "6%", "6%", "6%", "10%"]}
+            px={["4%", "4%", "6%", "6%", "10%"]}
             justify="center"
             align="center"
-            flexDir="row"
+            flexDir={["column", "row", "row"]} // Stack vertically on mobile
             w="100%"
-            h="120px"
+            h="auto" // Let height grow naturally
             gap={4}
             className="animate__animated animate__fadeIn"
-            flexWrap={["wrap", "wrap", "wrap", "wrap", "wrap", "wrap"]}
+            flexWrap="wrap"
           >
             {group1.map((item, index) => (
               <ClickableBox key={index} onClick={item.onClick} icon={item.icon}>
@@ -167,9 +165,7 @@ const ChatArea = () => {
             ))}
           </Stack>
         </Box>
-
       </Box>
-   
     </>
   );
 };

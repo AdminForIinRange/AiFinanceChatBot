@@ -61,7 +61,15 @@ const ActiveChatArea = () => {
 
   return (
     <Box px={["4%", "4%", "6%", "6%", "6%", "10%"]}>
-      <VStack mb="250px" pb={"100px"}>
+      
+      <Box display={["block", "block", "block", "block", "block", "block"]}>
+
+      <Box display={isAiPrompting ? "none" : "block"}>
+        <ChatArea />
+      </Box>
+      </Box>
+
+      <VStack  pb={"100px"} >
         {messages.map((msg, idx) => {
           const alignment = msg.from === "User" ? "end" : "start";
           return (
@@ -103,15 +111,13 @@ const ActiveChatArea = () => {
         })}
       </VStack>
 
-      <Box display={isAiPrompting ? "none" : "block"}>
-        <ChatArea />
-      </Box>
-
       <VStack
+      transition={"all 0.2s ease-in-out"}
 
       rounded={"15px"}
         px={["4%", "4%", "6%", "6%", "6%", "10%"]}
-        position="fixed"
+     
+        position={isAiPrompting ? "fixed" : "static"}
         bottom={0}
         left={0}
         right={0}
