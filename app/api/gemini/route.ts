@@ -46,7 +46,7 @@ export async function POST(request: Request) {
       contents: finalPrompt,
       // Adjust parameters as needed
       maxOutputTokens: 500,
-      temperature: 0.3, // Slightly higher temperature for more creative/insightful responses
+      temperature: 0, // Adjust temperature as needed
       // You can also specify a custom promptFormat
       promptFormat: {
         type: "text",
