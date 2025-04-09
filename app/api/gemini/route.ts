@@ -15,28 +15,31 @@ export async function POST(request: Request) {
       );
     }
 
-    const userPromptModified = `You are acting as a seasoned Wall Street investor. The user is asking: "${userPrompt}". Please provide an insightful and analytical response, Format your response using paragraphs and enclose each distinct segment of information within a blockquote (using the '>' symbol).`;
+    const userPromptModified = `You are acting as a seasoned Wall Street investor. The user is asking: "${userPrompt}".Please Keep it short and to the point. Please provide an insightful and analytical response, Format your response using paragraphs and enclose each distinct segment of information within a blockquote (using the '>' symbol).`;
 
     let finalPrompt = userPromptModified;
-    const financialKeywords = [
-      "stock",
-      "finance",
-      "financial",
-      "investment",
-      "ticker",
-      "share",
-      "market",
-      "economy",
-      "$",
-    ]; // Add more keywords as needed
 
-    const isFinancialQuery = financialKeywords.some((keyword) =>
-      userPrompt.toLowerCase().includes(keyword),
-    );
+    // const financialKeywords = [
+    //   "stock",
+    //   "finance",
+    //   "financial",
+    //   "investment",
+    //   "ticker",
+    //   "share",
+    //   "market",
+    //   "economy",
+    //   "$",
+    // ]; 
+    
+    // Add more keywords as needed
 
-    if (isFinancialQuery) {
-      finalPrompt = ` Remember to state clearly that this is not financial advice.`;
-    }
+    // const isFinancialQuery = financialKeywords.some((keyword) =>
+    //   userPrompt.toLowerCase().includes(keyword),
+    // );
+
+    // if (isFinancialQuery) {
+    //   finalPrompt = ` Remember to state clearly that this is not financial advice.`;
+    // }
 
     const config = {
       model: "gemini-2.0-flash", // Choose a different model if desired
