@@ -25,10 +25,11 @@ const Navbar = () => {
       >
         <VStack w={"100%"} justify={"start"} align={"start"} >
           <Text
+    
        fontFamily={"poppins"}
             fontWeight={500}
             fontSize={["18px", "18px", "24px", "24px", "24px", "24px"]}
-            color={"gray.400"}
+            color={"gray.200"}
             as={"a"}
             href={"/"}
           >

@@ -20,7 +20,7 @@ const ClickableBox = ({ onClick, icon, children }) => (
     flexDir="column"
     fontFamily="poppins"
     fontSize={["14px", "14px", "16px"]}
-    color="gray.400"
+    color="gray.200"
     textAlign="start"
     w={["100%", "100%", "300px"]} // Full width on mobile, 300px on larger screens
     h="100%"

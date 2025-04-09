@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Box, Text, Input, HStack, VStack } from "@chakra-ui/react";
 import { CornerDownLeft } from "lucide-react";
 import ChatArea from "./chatArea";
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from "react-markdown";
 // A small component to animate dots
 const LoadingDots = () => {
   const [dots, setDots] = useState("");
@@ -27,7 +27,7 @@ const ActiveChatArea = () => {
     setMessages((prev) => [
       ...prev,
       { from: "User", text: currentInput },
-      { from: "AgrAi", text: "thinking", loading: true },
+      { from: "VelvoTrade", text: "thinking", loading: true },
     ]);
     setIsAiPrompting(true);
     try {
@@ -43,7 +43,7 @@ const ActiveChatArea = () => {
       setMessages((prev) =>
         prev.map((msg, idx) =>
           idx === prev.length - 1
-            ? { from: "AgrAi", text: data.response || data.result }
+            ? { from: "VelvoTrade", text: data.response || data.result }
             : msg,
         ),
       );
@@ -52,7 +52,7 @@ const ActiveChatArea = () => {
       setMessages((prev) =>
         prev.map((msg, idx) =>
           idx === prev.length - 1
-            ? { from: "AgrAi", text: "Error fetching response." }
+            ? { from: "VelvoTrade", text: "Error fetching response." }
             : msg,
         ),
       );
@@ -61,15 +61,13 @@ const ActiveChatArea = () => {
 
   return (
     <Box px={["4%", "4%", "6%", "6%", "6%", "10%"]}>
-      
       <Box display={["block", "block", "block", "block", "block", "block"]}>
-
-      <Box display={isAiPrompting ? "none" : "block"}>
-        <ChatArea />
+        <Box display={isAiPrompting ? "none" : "block"}>
+          <ChatArea />
+        </Box>
       </Box>
-      </Box>
 
-      <VStack  pb={"100px"} >
+      <VStack w={"100%"} pb={"190px"}>
         {messages.map((msg, idx) => {
           const alignment = msg.from === "User" ? "end" : "start";
           return (
@@ -81,42 +79,40 @@ const ActiveChatArea = () => {
               pb={"20px"}
             >
               <HStack w="100%" justify={alignment} align="center">
-                <Text color="gray.400" fontWeight={600}>
+                <Text color="gray.200" fontWeight={600}>
                   {msg.from}
                 </Text>
               </HStack>
               <HStack w="100%" justify={alignment} align="center">
-            <Box
-              shadow="md"
-              rounded="xl"
-              p={2}
-              px={4}
-              bg="#303030"
-              fontFamily="poppins"
-              fontWeight={400}
-              fontSize="18px"
-              color="gray.400"
-              w="fit-content" // Adjust width as needed
-            >
-              {msg.from === "AgrAi" ? (
-                <ReactMarkdown>{msg.text}</ReactMarkdown>
-              ) : (
-                <>{msg.text}</>
-              )}
-              {msg.loading && <LoadingDots />}
-            </Box>
-          </HStack>
+                <Box
+                  shadow="md"
+                  rounded="xl"
+                  p={2}
+                  px={4}
+                  bg="#303030"
+                  fontFamily="poppins"
+                  fontWeight={400}
+                  fontSize="18px"
+                  color="gray.200"
+                  w="fit-content" // Adjust width as needed
+                >
+                  {msg.from === "VelvoTrade" ? (
+                    <ReactMarkdown>{msg.text}</ReactMarkdown>
+                  ) : (
+                    <>{msg.text}</>
+                  )}
+                  {msg.loading && <LoadingDots />}
+                </Box>
+              </HStack>
             </VStack>
           );
         })}
       </VStack>
 
       <VStack
-      transition={"all 0.2s ease-in-out"}
-
-      rounded={"15px"}
+        transition={"all 0.2s ease-in-out"}
+        rounded={"15px"}
         px={["4%", "4%", "6%", "6%", "6%", "10%"]}
-     
         position={isAiPrompting ? "fixed" : "static"}
         bottom={0}
         left={0}
@@ -127,7 +123,7 @@ const ActiveChatArea = () => {
         mb={8}
         w={"100%"}
       >
-        <HStack w={"100%"} bg={"gray.700"} p={2} borderRadius={"30px"} >
+        <HStack w={"100%"} bg={"gray.700"} p={2} borderRadius={"30px"}>
           <Input
             variant="outline"
             textIndent="8"
@@ -175,7 +171,7 @@ const ActiveChatArea = () => {
         </HStack>
         <Text
           mt="10px"
-          color="gray.400"
+          color="gray.200"
           width={["90%", "90%", "90%", "40%", "40%", "40%"]}
           textAlign="center"
           fontSize="14px"
