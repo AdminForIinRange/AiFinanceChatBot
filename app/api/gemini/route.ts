@@ -1,80 +1,66 @@
 import { NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
 
-// Create an instance of the Gemini SDK using the API key from your environment
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
 
 export async function POST(request: Request) {
   try {
-    // Parse JSON from the client (expecting a "prompt")
-    const { prompt: userPrompt } = await request.json();
-    if (!userPrompt) {
+    const { prompt: userPrompt, symbol } = await request.json();
+    if (!userPrompt || !symbol) {
       return NextResponse.json(
-        { error: "Missing prompt parameter." },
-        { status: 400 },
+        { error: "Missing prompt or symbol." },
+        { status: 400 }
       );
     }
 
-    const userPromptModified = `You are acting as a seasoned Wall Street investor. The user is asking: "${userPrompt}".Please Keep it short and to the point. Please provide an insightful and analytical response, Format your response using paragraphs and enclose each distinct segment of information within a blockquote (using the '>' symbol), if the user is asking a question redgueding financial matter state this is not financial advice but please provide an insightful and analytical response.`;
+    const finnhubKey = process.env.FINNHUB_API_KEY!;
+    const today = new Date();
+    const prior = new Date();
+    prior.setDate(today.getDate() - 7);
+    const from = prior.toISOString().split("T")[0];
+    const to = today.toISOString().split("T")[0];
 
-    let finalPrompt = userPromptModified;
+    const [quoteRes, newsRes] = await Promise.all([
+      fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${finnhubKey}`),
+      fetch(`https://finnhub.io/api/v1/company-news?symbol=${symbol}&from=${from}&to=${to}&token=${finnhubKey}`)
+    ]);
 
-    // const financialKeywords = [
-    //   "stock",
-    //   "finance",
-    //   "financial",
-    //   "investment",
-    //   "ticker",
-    //   "share",
-    //   "market",
-    //   "economy",
-    //   "$",
-    // ]; 
-    
-    // Add more keywords as needed
+    const [stock, news] = await Promise.all([
+      quoteRes.json(),
+      newsRes.json()
+    ]);
 
-    // const isFinancialQuery = financialKeywords.some((keyword) =>
-    //   userPrompt.toLowerCase().includes(keyword),
-    // );
+    const summaryNews = news.slice(0, 3).map(n => `- ${n.headline}: ${n.summary}`).join('\n');
 
-    // if (isFinancialQuery) {
-    //   finalPrompt = ` Remember to state clearly that this is not financial advice.`;
-    // }
+    const finalPrompt = `
+You are a seasoned Wall Street investor. The user asked:
+"${userPrompt}"
+
+> Stock Ticker: ${symbol}
+> Current Price: $${stock.c}
+> High: $${stock.h}, Low: $${stock.l}, Open: $${stock.o}, Previous Close: $${stock.pc}
+
+> Recent News:
+${summaryNews}
+
+Please keep your answer insightful and concise. Format each point as a blockquote (with '>'), and remind the user that this is not financial advice.
+`;
 
     const config = {
-      model: "gemini-2.0-flash", // Choose a different model if desired
+      model: "gemini-2.0-flash",
       contents: finalPrompt,
-      // Adjust parameters as needed
       maxOutputTokens: 500,
-      temperature: 0, // Adjust temperature as needed
-      // You can also specify a custom promptFormat
-      promptFormat: {
-        type: "text",
-        // Add your desired custom prompt fields here
-        fields: {
-          tone: "analytical",
-          format: "text",
-          // Add more fields to customize the AI's behavior
-          language: "en-US",
-          domain: "finance",
-          task: "analyze and generate", // Changed task to reflect more analytical behavior
-          style: "insightful", // Changed style to reflect a Wall Street investor's perspective
-          audience: "investors",
-          persona: "experienced_financial_analyst", // More specific persona
-        },
-      },
+      temperature: 0.5
     };
 
-    // Call Gemini API using generateContent with the customized config
     const result = await ai.models.generateContent(config);
-
-    // Log or modify result as needed; we return the generated text.
     return NextResponse.json({ response: result.text });
+
   } catch (error: any) {
-    console.error("Error in api/gemini route:", error);
+    console.error("Gemini API error:", error);
     return NextResponse.json(
-      { error: "Internal server error", details: error.message },
-      { status: 500 },
+      { error: "Internal error", details: error.message },
+      { status: 500 }
     );
   }
 }
