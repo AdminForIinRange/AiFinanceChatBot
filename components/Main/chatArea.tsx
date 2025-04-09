@@ -22,9 +22,9 @@ const ClickableBox = ({ onClick, icon, children }) => (
     fontSize={["14px", "14px", "16px"]}
     color="gray.200"
     textAlign="start"
-    w={["100%", "100%", "300px"]} // Full width on mobile, 300px on larger screens
-    h="100%"
-    my={2}
+    w={["100%", "200px", "200px","200px", "250px", "250px"]} // Full width on mobile, 300px on larger screens
+    h={["100px", "150PX", "200PX","200PX", "180PX", "180PX"]}
+   
     bg="#303030"
     p={["12px", "14px", "18px"]}
     rounded="lg"
@@ -154,7 +154,7 @@ const ChatArea = () => {
             flexDir={["column", "row", "row"]} // Stack vertically on mobile
             w="100%"
             h="auto" // Let height grow naturally
-            gap={4}
+            gap={["10px", "15px", "15px"]}
             className="animate__animated animate__fadeIn"
             flexWrap="wrap"
           >
