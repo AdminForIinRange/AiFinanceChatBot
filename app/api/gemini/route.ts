@@ -117,7 +117,7 @@ export async function POST(request: Request) {
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
-  const symbol = searchParams.get('symbol') || 'AAPL';
+  const symbol = searchParams.get('symbol');
   const apiKey = process.env.FINNHUB_API_KEY;
 
   const today = new Date();
