@@ -24,10 +24,7 @@ const ActiveChatArea = () => {
   >([]);
   const [isAiPrompting, setIsAiPrompting] = useState(false);
 
-  const extractSymbol = (text: string) => {
-    const match = text.match(/\$(\w{1,5})/);
-    return match ? match[1].toUpperCase() : null;
-  };
+
   
   const sendPrompt = async (currentInput: string) => {
     setMessages((prev) => [
@@ -40,10 +37,7 @@ const ActiveChatArea = () => {
       const response = await fetch("/api/gemini", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          prompt: currentInput,
-          symbol: extractSymbol(currentInput) || "AAPL", // auto-detect symbol or fallback
-        }),
+        body: JSON.stringify({ prompt: currentInput }),
       });
       const data = await response.json();
   
