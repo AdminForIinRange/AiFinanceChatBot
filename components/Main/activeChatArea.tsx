@@ -1,11 +1,10 @@
-"use client";
 import React, { useState, useEffect } from "react";
 import { Box, Text, Input, HStack, VStack } from "@chakra-ui/react";
 import { CornerDownLeft } from "lucide-react";
 import ChatArea from "./chatArea";
 import ReactMarkdown from "react-markdown";
 import LowerNavigationBoxes from "./lowerNavigationBoxes";
-// A small component to animate dots
+
 const LoadingDots = () => {
   const [dots, setDots] = useState("");
   useEffect(() => {
@@ -19,13 +18,9 @@ const LoadingDots = () => {
 
 const ActiveChatArea = () => {
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState<
-    { from: string; text: string; loading?: boolean }[]
-  >([]);
+  const [messages, setMessages] = useState<{ from: string; text: string; loading?: boolean }[]>([]);
   const [isAiPrompting, setIsAiPrompting] = useState(false);
 
-
-  
   const sendPrompt = async (currentInput: string) => {
     setMessages((prev) => [
       ...prev,
@@ -40,7 +35,7 @@ const ActiveChatArea = () => {
         body: JSON.stringify({ prompt: currentInput }),
       });
       const data = await response.json();
-  
+
       setMessages((prev) =>
         prev.map((msg, idx) =>
           idx === prev.length - 1
@@ -59,7 +54,13 @@ const ActiveChatArea = () => {
       );
     }
   };
-  
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && input.trim().length > 0) {
+      sendPrompt(input);
+      setInput(""); // Clear input after sending
+    }
+  };
 
   return (
     <>
@@ -101,7 +102,7 @@ const ActiveChatArea = () => {
                     fontWeight={400}
                     fontSize="18px"
                     color="gray.200"
-                    w="fit-content" // Adjust width as needed
+                    w="fit-content"
                   >
                     {msg.from === "VelvoTrade" ? (
                       <ReactMarkdown>{msg.text}</ReactMarkdown>
@@ -143,6 +144,7 @@ const ActiveChatArea = () => {
               value={input}
               bg="#303030"
               onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown} // Add the event handler here
               border="1px solid #7A7A7A"
               _focus={{
                 border: "1px solid #7A7A7A",
