@@ -3,32 +3,35 @@
 import type React from "react"
 import { useState, useEffect, useRef } from "react"
 import { Box, Text, HStack, VStack } from "@chakra-ui/react"
-import { Send, BarChart2, Clock } from "lucide-react"
+import { Send, ChevronDown, BarChart2, Clock, AlertCircle, CheckCircle, Zap } from "lucide-react"
 import ChatArea from "./chatArea"
 import ReactMarkdown from "react-markdown"
 import LowerNavigationBoxes from "./lowerNavigationBoxes"
 
-// Refined darker trading platform theme
+// TradingView-inspired theme colors
 const theme = {
   bg: {
-    primary: "#0E1116", // Darker background
-    secondary: "#161B22", // Slightly lighter for contrast
-    tertiary: "#1F2937", // For input fields and interactive elements
-    accent: "#242F3E", // For hover states
+    primary: "#131722",
+    secondary: "#1E222D",
+    tertiary: "#2A2E39",
+    input: "#2A2E39",
+    accent: "#242732",
   },
   text: {
-    primary: "#E5E7EB", // Main text
-    secondary: "#9CA3AF", // Secondary text
-    muted: "#6B7280", // Muted text
+    primary: "#D9D9D9",
+    secondary: "#9CA3AF",
+    muted: "#6B7280",
   },
   accent: {
-    green: "#10B981", // Success/positive (more muted)
-    red: "#EF4444", // Error/negative (more muted)
-    neutral: "#6B7280", // Neutral accent
+    blue: "#2962FF",
+    green: "#26A69A",
+    red: "#EF5350",
+    yellow: "#F9A825",
+    purple: "#7B1FA2",
   },
   border: {
-    light: "#30363D", // Subtle borders
-    medium: "#3E4C5A", // Medium emphasis borders
+    light: "#363A45",
+    medium: "#4A4F5C",
   },
 }
 
@@ -43,11 +46,14 @@ const LoadingIndicator = () => {
   }, [])
 
   return (
-    <Box my={2}>
-      <Box w="100%" h="2px" bg={theme.bg.accent} borderRadius="full" overflow="hidden">
-        <Box h="100%" w={`${progress}%`} bg={theme.accent.neutral} transition="width 0.2s ease" />
+    <HStack spacing={2} align="center" my={1}>
+      <Box w="100%" h="2px" bg={theme.border.light} borderRadius="full" overflow="hidden">
+        <Box h="100%" w={`${progress}%`} bg={theme.accent.blue} transition="width 0.2s ease" borderRadius="full" />
       </Box>
-    </Box>
+      <Text fontSize="xs" color={theme.text.secondary}>
+        {progress < 100 ? "Processing" : "Analyzing market data"}
+      </Text>
+    </HStack>
   )
 }
 
@@ -58,8 +64,8 @@ const MessageTimestamp = ({ date }: { date: Date }) => {
 
   return (
     <HStack spacing={1} opacity={0.7}>
-      <Clock size={10} />
-      <Text fontSize="xs" color={theme.text.muted}>
+      <Clock size={12} />
+      <Text fontSize="xs" color={theme.text.secondary}>
         {formatTime(date)}
       </Text>
     </HStack>
@@ -177,21 +183,30 @@ const ActiveChatArea = () => {
 
   return (
     <Box bg={theme.bg.primary} minH="100vh" color={theme.text.primary} position="relative" overflow="hidden">
-      {/* Minimalist Header */}
+      {/* Header */}
       <Box
         position="sticky"
         top={0}
         zIndex={10}
-        bg={theme.bg.primary}
+        bg={theme.bg.secondary}
         borderBottom={`1px solid ${theme.border.light}`}
-        px={4}
+        px={6}
         py={3}
       >
         <HStack justify="space-between" maxW="1400px" mx="auto">
           <HStack spacing={3}>
-            <Text fontWeight="medium" fontSize="sm">
-              VelvoTrade AI
-            </Text>
+            <Box
+              bg={theme.accent.blue}
+              color="white"
+              p={1}
+              borderRadius="md"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Zap size={16} />
+            </Box>
+            <Text fontWeight="bold">AI Trading Assistant</Text>
           </HStack>
           <HStack spacing={4}>
             <Box
@@ -200,15 +215,32 @@ const ActiveChatArea = () => {
               alignItems="center"
               px={3}
               py={1}
-              borderRadius="sm"
-              bg="transparent"
-              _hover={{ bg: theme.bg.accent }}
+              borderRadius="md"
+              bg={theme.bg.tertiary}
+              _hover={{ bg: theme.accent.blue, color: "white" }}
               transition="all 0.2s"
             >
               <BarChart2 size={14} />
-              <Text ml={2} fontSize="xs" color={theme.text.secondary}>
+              <Text ml={2} fontSize="sm">
                 Market Data
               </Text>
+            </Box>
+            <Box
+              as="button"
+              display="flex"
+              alignItems="center"
+              px={3}
+              py={1}
+              borderRadius="md"
+              bg={theme.bg.tertiary}
+              _hover={{ bg: theme.accent.blue, color: "white" }}
+              transition="all 0.2s"
+            >
+              <Text fontSize="sm">BTC/USD</Text>
+              <Text ml={1} fontSize="sm" color={theme.accent.green}>
+                48,235.50
+              </Text>
+              <ChevronDown size={14} />
             </Box>
           </HStack>
         </HStack>
@@ -227,35 +259,64 @@ const ActiveChatArea = () => {
         {isAiPrompting && (
           <VStack
             w="100%"
-            spacing={5}
+            spacing={6}
             align="stretch"
             maxW="1400px"
             mx="auto"
-            h="calc(100vh - 180px)"
+            h="calc(100vh - 200px)"
             overflowY="auto"
             css={{
               "&::-webkit-scrollbar": {
-                width: "4px",
+                width: "6px",
               },
               "&::-webkit-scrollbar-track": {
-                background: "transparent",
+                background: theme.bg.secondary,
               },
               "&::-webkit-scrollbar-thumb": {
-                background: theme.border.light,
-                borderRadius: "2px",
+                background: theme.border.medium,
+                borderRadius: "3px",
               },
               "&::-webkit-scrollbar-thumb:hover": {
-                background: theme.border.medium,
+                background: theme.accent.blue,
               },
             }}
             px={2}
             pt={4}
           >
-            {/* Welcome card - simplified */}
+            {/* Welcome card */}
             {showWelcome && (
-              <Box bg={theme.bg.secondary} borderRadius="md" p={8} mb={6} maxW="900px" mx="auto">
-                <Text fontSize="sm" fontWeight="medium" mb={3}>
-                  Ask me about market trends, trading strategies, or specific assets.
+              <Box
+                bg={theme.bg.secondary}
+                borderRadius="lg"
+                p={6}
+                border={`1px solid ${theme.border.light}`}
+                mb={6}
+                boxShadow="0 4px 20px rgba(0,0,0,0.2)"
+                maxW="900px"
+                mx="auto"
+              >
+                <HStack spacing={4} mb={4}>
+                  <Box
+                    bg={theme.accent.blue}
+                    p={3}
+                    borderRadius="lg"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <BarChart2 size={24} />
+                  </Box>
+                  <Box>
+                    <Text fontSize="xl" fontWeight="bold">
+                      VelvoTrade AI Assistant
+                    </Text>
+                    <Text color={theme.text.secondary}>Your personal trading and market analysis companion</Text>
+                  </Box>
+                </HStack>
+
+                <Text mb={4}>
+                  Ask me about market trends, trading strategies, technical analysis, or specific assets. I'm here to
+                  help with your trading decisions.
                 </Text>
 
                 <VStack align="stretch" spacing={2}>
@@ -272,12 +333,12 @@ const ActiveChatArea = () => {
                         sendPrompt(suggestion)
                       }}
                       bg={theme.bg.tertiary}
-                      p={2.5}
-                      borderRadius="sm"
+                      p={3}
+                      borderRadius="md"
                       textAlign="left"
                       _hover={{ bg: theme.bg.accent }}
                       transition="all 0.2s"
-                      fontSize="sm"
+                      border={`1px solid ${theme.border.light}`}
                     >
                       <Text>{suggestion}</Text>
                     </Box>
@@ -293,7 +354,7 @@ const ActiveChatArea = () => {
                   ? theme.accent.green
                   : msg.sentiment === "negative"
                     ? theme.accent.red
-                    : theme.accent.neutral
+                    : theme.accent.blue
 
               return (
                 <Box
@@ -312,29 +373,49 @@ const ActiveChatArea = () => {
                   mb={4}
                 >
                   <HStack spacing={2} justify={isUser ? "flex-end" : "flex-start"} mb={1}>
-                    <Text fontSize="xs" color={theme.text.secondary}>
-                      {msg.from} 
+                    <Box
+                      w="28px"
+                      h="28px"
+                      borderRadius="md"
+                      bg={isUser ? theme.bg.tertiary : theme.bg.tertiary}
+                      border={`1px solid ${isUser ? theme.accent.blue : sentimentColor}`}
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      fontSize="12px"
+                      fontWeight="bold"
+                      order={isUser ? 2 : 1}
+                    >
+                      {isUser ? "U" : "AI"}
+                    </Box>
+                    <Text fontSize="xs" color={theme.text.secondary} order={isUser ? 1 : 2}>
+                      {msg.from}
                     </Text>
-                    <MessageTimestamp date={msg.timestamp} />
+                    <Box order={isUser ? 3 : 3}>
+                      <MessageTimestamp date={msg.timestamp} />
+                    </Box>
                   </HStack>
 
                   <Box
                     bg={isUser ? theme.bg.tertiary : theme.bg.secondary}
-                    p={3.5}
-                    borderRadius="sm"
+                    p={4}
+                    borderRadius="md"
+                    boxShadow="0 2px 10px rgba(0,0,0,0.1)"
+                    borderLeft={!isUser ? `2px solid ${sentimentColor}` : "none"}
+                    borderRight={isUser ? `2px solid ${theme.accent.blue}` : "none"}
                     position="relative"
                   >
                     {msg.loading ? (
                       <Box>
-                        <Text fontSize="sm" color={theme.text.secondary} mb={1}>
-                          Processing request
+                        <Text mb={2} fontWeight="medium">
+                          Analyzing your request...
                         </Text>
                         <LoadingIndicator />
                       </Box>
                     ) : (
                       <Box
                         className="message-content"
-                        fontSize="sm"
+                        fontSize="15px"
                         lineHeight="1.6"
                         css={{
                           "& p": {
@@ -343,20 +424,20 @@ const ActiveChatArea = () => {
                           "& code": {
                             backgroundColor: theme.bg.primary,
                             padding: "0.2em 0.4em",
-                            borderRadius: "2px",
+                            borderRadius: "4px",
                             fontSize: "0.9em",
                             fontFamily: "monospace",
                           },
                           "& pre": {
                             backgroundColor: theme.bg.primary,
                             padding: "1em",
-                            borderRadius: "2px",
+                            borderRadius: "4px",
                             overflowX: "auto",
                             margin: "0.5em 0",
                             border: `1px solid ${theme.border.light}`,
                           },
                           "& a": {
-                            color: theme.text.primary,
+                            color: theme.accent.blue,
                             textDecoration: "underline",
                           },
                           "& ul, & ol": {
@@ -364,20 +445,17 @@ const ActiveChatArea = () => {
                             margin: "0.5em 0",
                           },
                           "& strong": {
-                            color: sentimentColor,
+                            color: isUser ? theme.accent.blue : sentimentColor,
                           },
                           "& h1, & h2, & h3, & h4": {
                             borderBottom: `1px solid ${theme.border.light}`,
                             paddingBottom: "0.3em",
                             marginTop: "1em",
-                            fontSize: "1em",
-                            fontWeight: "600",
                           },
                           "& table": {
                             borderCollapse: "collapse",
                             width: "100%",
                             margin: "1em 0",
-                            fontSize: "0.9em",
                           },
                           "& th, & td": {
                             border: `1px solid ${theme.border.light}`,
@@ -395,6 +473,33 @@ const ActiveChatArea = () => {
                         )}
                       </Box>
                     )}
+
+                    {!isUser && !msg.loading && (
+                      <HStack mt={3} pt={2} borderTop={`1px solid ${theme.border.light}`} spacing={4}>
+                        <Box
+                          as="button"
+                          display="flex"
+                          alignItems="center"
+                          fontSize="xs"
+                          color={theme.text.secondary}
+                          _hover={{ color: theme.accent.blue }}
+                        >
+                          <CheckCircle size={14} />
+                          <Text ml={1}>Helpful</Text>
+                        </Box>
+                        <Box
+                          as="button"
+                          display="flex"
+                          alignItems="center"
+                          fontSize="xs"
+                          color={theme.text.secondary}
+                          _hover={{ color: theme.accent.red }}
+                        >
+                          <AlertCircle size={14} />
+                          <Text ml={1}>Not helpful</Text>
+                        </Box>
+                      </HStack>
+                    )}
                   </Box>
                 </Box>
               )
@@ -404,39 +509,53 @@ const ActiveChatArea = () => {
         )}
       </Box>
 
-      {/* Minimalist input area */}
+      {/* Fixed input area at bottom */}
       <Box
         position="fixed"
         bottom={0}
         left={0}
         right={0}
         bg={`linear-gradient(to top, ${theme.bg.primary} 85%, transparent)`}
-        py={5}
+        py={6}
         px={["4%", "4%", "6%", "6%", "6%", "10%"]}
         zIndex={1000}
       >
-        <VStack maxW="1400px" mx="auto" spacing={2}>
-          <HStack w="100%" spacing={2} bg={theme.bg.secondary} p={3} borderRadius="sm">
+        <VStack maxW="1400px" mx="auto" spacing={3}>
+          <HStack
+            w="100%"
+            spacing={3}
+            bg={theme.bg.secondary}
+            p={2}
+            borderRadius="md"
+            boxShadow="0 4px 20px rgba(0, 0, 0, 0.3)"
+            border={`1px solid ${theme.border.light}`}
+          >
             <Box
               as="input"
               ref={inputRef}
               autoFocus
               type="text"
-              placeholder="Ask about market analysis or trading strategies..."
+              placeholder="Ask about market analysis, trading strategies, or technical indicators..."
               w="100%"
-              height="58px"
+              height="50px"
               value={input}
-              bg={theme.bg.tertiary}
+              bg={theme.bg.input}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              border="none"
+              border={`1px solid ${theme.border.light}`}
               _focus={{
+                border: `1px solid ${theme.accent.blue}`,
+                boxShadow: `0 0 0 1px ${theme.accent.blue}`,
                 outline: "none",
               }}
+              _hover={{
+                border: `1px solid ${theme.border.medium}`,
+              }}
               color={theme.text.primary}
-              borderRadius="sm"
-              fontSize="sm"
-              px={3}
+              borderRadius="md"
+              fontSize="15px"
+              px={4}
+              transition="all 0.2s ease"
             />
             <Box
               onClick={() => {
@@ -449,28 +568,48 @@ const ActiveChatArea = () => {
               display="flex"
               justifyContent="center"
               alignItems="center"
-              minWidth="42px"
-              height="58px"
-              bg={input.trim().length > 0 ? theme.bg.accent : theme.bg.tertiary}
-              borderRadius="sm"
+              minWidth="50px"
+              height="50px"
+              bg={input.trim().length > 0 ? theme.accent.blue : theme.bg.tertiary}
+              borderRadius="md"
               _hover={{
-                bg: theme.bg.accent,
+                bg: input.trim().length > 0 ? "#1E53E5" : theme.bg.tertiary,
+                transform: input.trim().length > 0 ? "translateY(-2px)" : "none",
+              }}
+              _active={{
+                transform: "translateY(0)",
               }}
               transition="all 0.2s ease"
               cursor={input.trim().length > 0 ? "pointer" : "not-allowed"}
               aria-label="Send message"
             >
-              <Send size={16} color={theme.text.primary} />
+              <Send size={18} color={input.trim().length > 0 ? "white" : theme.text.secondary} />
             </Box>
           </HStack>
 
-          <Text color={theme.text.muted} fontSize="xs" textAlign="center">
-            AI Assistant is ready to help with your trading questions
-          </Text>
+          <HStack spacing={2} justify="center">
+            <Box
+              w="8px"
+              h="8px"
+              borderRadius="full"
+              bg={theme.accent.green}
+              animation="pulse 2s infinite"
+              sx={{
+                "@keyframes pulse": {
+                  "0%": { opacity: 0.4 },
+                  "50%": { opacity: 1 },
+                  "100%": { opacity: 0.4 },
+                },
+              }}
+            />
+            <Text color={theme.text.secondary} fontSize="xs">
+              AI Assistant is online and ready to help with your trading questions
+            </Text>
+          </HStack>
         </VStack>
       </Box>
 
-      {/* <LowerNavigationBoxes /> */}
+      <LowerNavigationBoxes />
     </Box>
   )
 }

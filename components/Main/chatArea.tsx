@@ -25,11 +25,11 @@ const ClickableBox = ({ onClick, icon, children }) => (
     w={["100%", "200px", "200px","200px", "250px", "250px"]} // Full width on mobile, 300px on larger screens
     h={["100px", "150PX", "200PX","200PX", "180PX", "180PX"]}
    
-    bg="#303030"
+    bg="#0E1116"
     p={["12px", "14px", "18px"]}
     rounded="lg"
-    border="1px solid #7A7A7A"
-    _hover={{ bg: "#404040", transform: "scale(1.02)" }}
+    border="1px solid #30363D"
+    _hover={{ bg: "#161B22", transform: "scale(1.02)" }}
     transition="all 0.2s ease-in-out"
     cursor="pointer"
   >

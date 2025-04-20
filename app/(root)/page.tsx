@@ -28,7 +28,6 @@ const Home = () => {
   return (
     <>
       <ReactLenis root />
-<Navbar />
       <ActiveChatArea />
     </>
   );
