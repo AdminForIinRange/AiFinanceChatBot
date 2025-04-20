@@ -193,24 +193,7 @@ const ActiveChatArea = () => {
               VelvoTrade AI
             </Text>
           </HStack>
-          <HStack spacing={4}>
-            <Box
-              as="button"
-              display="flex"
-              alignItems="center"
-              px={3}
-              py={1}
-              borderRadius="sm"
-              bg="transparent"
-              _hover={{ bg: theme.bg.accent }}
-              transition="all 0.2s"
-            >
-              <BarChart2 size={14} />
-              <Text ml={2} fontSize="xs" color={theme.text.secondary}>
-                Market Data
-              </Text>
-            </Box>
-          </HStack>
+         
         </HStack>
       </Box>
 
