@@ -5,7 +5,7 @@ const config = defineConfig({
   globalCss: {
     html: {
       scrollBehavior: "auto !important", // Ensures Chakra does not override Lenis
-   backgroundColor: "#212121",
+  //  backgroundColor: "#212121",
       colorPalette: "blue", // Replace "blue" with your preferred color palette
     },
    
