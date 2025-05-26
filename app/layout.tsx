@@ -9,10 +9,10 @@ import { Suspense } from "react";
 import Loading from "./loading";
 // import { Analytics } from "@vercel/analytics/react";
 export const metadata = {
-  title: "VelvoTrade AI ",
+  title: "Finance Chat Bot ",
 
   description:
-    "VelvoTrade AI is a platform for understadning the market. It should not be used for any serious or business-critical purposes.",
+    "Finance Chat Bot is a platform for understadning the market. It should not be used for any serious or business-critical purposes.",
 };
 
 export default function RootLayout({

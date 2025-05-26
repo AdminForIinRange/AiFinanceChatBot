@@ -88,7 +88,7 @@ const ActiveChatArea = () => {
       setMessages([
         {
           from: "VelvoTrade",
-          text: "Welcome to VelvoTrade AI Assistant. I can help you with market analysis, finance strategies, and investment insights. What would you like to know today?",
+          text: "Welcome to Finance Chat Bot Assistant. I can help you with market analysis, finance strategies, and investment insights. What would you like to know today?",
           timestamp: new Date(),
           sentiment: "neutral",
         },
@@ -190,7 +190,7 @@ const ActiveChatArea = () => {
         <HStack justify="space-between" maxW="1400px" mx="auto">
           <HStack spacing={3}>
             <Text fontWeight="medium" fontSize="sm">
-              VelvoTrade AI
+              Finance Chat Bot
             </Text>
           </HStack>
          
@@ -448,7 +448,7 @@ const ActiveChatArea = () => {
           </HStack>
 
           <Text color={theme.text.muted} fontSize="xs" textAlign="center">
-         VelvoTrade AI is a platform for understadning the market. It should not be used for any serious or business-critical purposes.
+         Finance Chat Bot is a platform for understadning the market. It should not be used for any serious or business-critical purposes.
           </Text>
         </VStack>
       </Box>

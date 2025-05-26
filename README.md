@@ -1,4 +1,4 @@
-# VelvoTrade AI Chat
+# Finance Chat Bot
 
 An AI-powered, real-time chat assistant for market analysis, finance strategies, and investment insights — built with Next.js, React, and Chakra UI.
 
