@@ -448,7 +448,7 @@ const ActiveChatArea = () => {
           </HStack>
 
           <Text color={theme.text.muted} fontSize="xs" textAlign="center">
-            AI Assistant is ready to help with your trading questions
+         VelvoTrade AI is a platform for understadning the market. It should not be used for any serious or business-critical purposes.
           </Text>
         </VStack>
       </Box>

@@ -9,10 +9,10 @@ import { Suspense } from "react";
 import Loading from "./loading";
 // import { Analytics } from "@vercel/analytics/react";
 export const metadata = {
-  title: "Startup Mockup",
+  title: "VelvoTrade AI ",
 
   description:
-    "Startup Mockup",
+    "VelvoTrade AI is a platform for understadning the market. It should not be used for any serious or business-critical purposes.",
 };
 
 export default function RootLayout({
