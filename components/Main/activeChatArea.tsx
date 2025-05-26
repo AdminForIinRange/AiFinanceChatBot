@@ -448,7 +448,7 @@ const ActiveChatArea = () => {
           </HStack>
 
           <Text color={theme.text.muted} fontSize="xs" textAlign="center">
-         Finance Chat Bot is a platform for understadning the market. It should not be used for any serious or business-critical purposes.
+         Finance Chat Bot is a platform for understadning the market. It should not be used for any serious or business-critical purposes. By https://github.com/AdminForIinRange
           </Text>
         </VStack>
       </Box>
