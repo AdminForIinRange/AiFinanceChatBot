@@ -1,7 +1,7 @@
 # Finance Chat Bot
 
 An AI-powered, real-time chat assistant for market analysis, finance strategies, and investment insights — built with Next.js, React, and Chakra UI.
-
+(Not to be used as a financial instrument, it should not be used for any serious or business-critical purposes)
 ---
 
 ## Table of Contents
