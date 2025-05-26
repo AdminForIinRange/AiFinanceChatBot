@@ -87,7 +87,7 @@ const ActiveChatArea = () => {
     if (isAiPrompting && messages.length === 0) {
       setMessages([
         {
-          from: "VelvoTrade",
+          from: "Finance Chat Bot",
           text: "Welcome to Finance Chat Bot Assistant. I can help you with market analysis, finance strategies, and investment insights. What would you like to know today?",
           timestamp: new Date(),
           sentiment: "neutral",
@@ -119,7 +119,7 @@ const ActiveChatArea = () => {
     setMessages((prev) => [
       ...prev,
       { from: "User", text: currentInput, timestamp: new Date(), sentiment },
-      { from: "VelvoTrade", text: "thinking", loading: true, timestamp: new Date(), sentiment: "neutral" },
+      { from: "Finance Chat Bot", text: "thinking", loading: true, timestamp: new Date(), sentiment: "neutral" },
     ])
     setIsAiPrompting(true)
     setShowWelcome(false)
@@ -143,7 +143,7 @@ const ActiveChatArea = () => {
         prev.map((msg, idx) =>
           idx === prev.length - 1
             ? {
-                from: "VelvoTrade",
+                from: "Finance Chat Bot",
                 text: data.response || data.result,
                 timestamp: new Date(),
                 sentiment: responseSentiment,
@@ -157,7 +157,7 @@ const ActiveChatArea = () => {
         prev.map((msg, idx) =>
           idx === prev.length - 1
             ? {
-                from: "VelvoTrade",
+                from: "Finance Chat Bot",
                 text: "Error fetching response. Please try again.",
                 timestamp: new Date(),
                 sentiment: "negative",
@@ -371,7 +371,7 @@ const ActiveChatArea = () => {
                           },
                         }}
                       >
-                        {msg.from === "VelvoTrade" ? (
+                        {msg.from === "Finance Chat Bot" ? (
                           <ReactMarkdown>{msg.text}</ReactMarkdown>
                         ) : (
                           <Text>{msg.text}</Text>
@@ -448,7 +448,7 @@ const ActiveChatArea = () => {
           </HStack>
 
           <Text color={theme.text.muted} fontSize="xs" textAlign="center">
-         Finance Chat Bot is a platform for understadning the market. It should not be used for any serious or business-critical purposes. By https://github.com/AdminForIinRange
+         Finance Chat Bot is a platform for understadning the market. It should not be used for any serious or business-critical purposes. Fun passion project by https://github.com/AdminForIinRange
           </Text>
         </VStack>
       </Box>

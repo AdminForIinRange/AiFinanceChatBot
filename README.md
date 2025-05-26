@@ -60,10 +60,6 @@ An AI-powered, real-time chat assistant for market analysis, finance strategies,
 
 1. **Clone the repository**
 
-   ```bash
-   git clone https://github.com/your-username/velvotrade-ai-chat.git
-   cd velvotrade-ai-chat
-   ```
 2. **Install dependencies**
 
    ```bash

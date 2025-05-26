@@ -12,7 +12,7 @@ export const metadata = {
   title: "Finance Chat Bot",
 
   description:
-    "Finance Chat Bot is a platform for understadning the market. It should not be used for any serious or business-critical purposes.",
+    "Finance Chat Bot is a platform for understadning the market. It should not be used for any serious or business-critical purposes. Fun passion project by https://github.com/AdminForIinRange",
 };
 
 export default function RootLayout({
