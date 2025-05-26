@@ -108,9 +108,9 @@ const ChatArea = () => {
     },
     {
       onClick: () =>
-        setInput("What's a good broker to use for trading stocks in the US?"),
+        setInput("What's a good broker to use for finance stocks in the US?"),
       icon: <Globe size={32} />,
-      text: "What's a good broker to use for trading stocks in the US?",
+      text: "What's a good broker to use for finance stocks in the US?",
     },
   ];
 

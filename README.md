@@ -1,6 +1,6 @@
 # VelvoTrade AI Chat
 
-An AI-powered, real-time chat assistant for market analysis, trading strategies, and investment insights — built with Next.js, React, and Chakra UI.
+An AI-powered, real-time chat assistant for market analysis, finance strategies, and investment insights — built with Next.js, React, and Chakra UI.
 
 ---
 
@@ -28,7 +28,7 @@ An AI-powered, real-time chat assistant for market analysis, trading strategies,
 * **Sentiment analysis** on both user prompts and AI responses
 * **Dynamic loading indicator** for in-flight requests
 * **Smart suggestions** (e.g. “What’s your analysis on Bitcoin?”) to help get started
-* **Darker trading-platform theme** using Chakra UI and custom color tokens
+* **Darker finance-platform theme** using Chakra UI and custom color tokens
 * **Keyboard & click support**: press Enter or click Send to submit
 * **Responsive design**: works on mobile, tablet, and desktop
 

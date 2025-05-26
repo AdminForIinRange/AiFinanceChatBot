@@ -8,7 +8,7 @@ import ChatArea from "./chatArea"
 import ReactMarkdown from "react-markdown"
 import LowerNavigationBoxes from "./lowerNavigationBoxes"
 
-// Refined darker trading platform theme
+// Refined darker finance platform theme
 const theme = {
   bg: {
     primary: "#0E1116", // Darker background
@@ -88,7 +88,7 @@ const ActiveChatArea = () => {
       setMessages([
         {
           from: "VelvoTrade",
-          text: "Welcome to VelvoTrade AI Assistant. I can help you with market analysis, trading strategies, and investment insights. What would you like to know today?",
+          text: "Welcome to VelvoTrade AI Assistant. I can help you with market analysis, finance strategies, and investment insights. What would you like to know today?",
           timestamp: new Date(),
           sentiment: "neutral",
         },
@@ -238,14 +238,14 @@ const ActiveChatArea = () => {
             {showWelcome && (
               <Box bg={theme.bg.secondary} borderRadius="md" p={8} mb={6} maxW="900px" mx="auto">
                 <Text fontSize="sm" fontWeight="medium" mb={3}>
-                  Ask me about market trends, trading strategies, or specific assets.
+                  Ask me about market trends, finance strategies, or specific assets.
                 </Text>
 
                 <VStack align="stretch" spacing={2}>
                   {[
                     "What's your analysis on Bitcoin's current trend?",
                     "Explain the RSI indicator and how to use it",
-                    "What trading strategy would you recommend for volatile markets?",
+                    "What finance strategy would you recommend for volatile markets?",
                   ].map((suggestion, i) => (
                     <Box
                       key={i}
@@ -405,7 +405,7 @@ const ActiveChatArea = () => {
               ref={inputRef}
               autoFocus
               type="text"
-              placeholder="Ask about market analysis or trading strategies..."
+              placeholder="Ask about market analysis or finance strategies..."
               w="100%"
               height="58px"
               value={input}
