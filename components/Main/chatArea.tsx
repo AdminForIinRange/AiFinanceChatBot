@@ -10,7 +10,7 @@ import {
   Globe,
   CornerDownLeft,
 } from "lucide-react";
-import ActiveChatArea from "./activeChatArea";
+
 
 const ClickableBox = ({ onClick, icon, children }) => (
   <Box
